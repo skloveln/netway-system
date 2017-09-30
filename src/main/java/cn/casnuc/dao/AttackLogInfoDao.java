@@ -14,7 +14,7 @@ import cn.casnuc.entity.AttackQuery;
 
 public class AttackLogInfoDao {
 	
-	// ×¢ÈëSessionFactory¶ÔÏó
+	// æ³¨å…¥SessionFactoryå¯¹è±¡
 	private SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -22,9 +22,9 @@ public class AttackLogInfoDao {
 	}
 	
 	/**
-	 * ²éÑ¯¼ÇÂ¼×ÜÊı
-	 * @param attackQuery Ìõ¼ş²éÑ¯¶ÔÏó
-	 * @return È«²¿½á¹ûµÄ¼¯ºÏ
+	 * æŸ¥è¯¢è®°å½•æ€»æ•°
+	 * @param attackQuery æ¡ä»¶æŸ¥è¯¢å¯¹è±¡
+	 * @return å…¨éƒ¨ç»“æœçš„é›†åˆ
 	 */
 	@SuppressWarnings("unchecked")
 	public Integer queryAttackLog(AttackQuery attackQuery){
@@ -38,10 +38,10 @@ public class AttackLogInfoDao {
 		if(attackQuery.getAttackType() != 999){
 			c.add(Restrictions.eq("attackType", attackQuery.getAttackType()));
 		}
-		if(!attackQuery.getSourceMac().equals("È«²¿")){
+		if(!attackQuery.getSourceMac().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("sourceMac", attackQuery.getSourceMac()));
 		}
-		if(!attackQuery.getTargetIp().equals("È«²¿")){
+		if(!attackQuery.getTargetIp().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("targetIp", attackQuery.getTargetIp()));
 		}
 		if(attackQuery.getTargetPort() != -1){
@@ -57,11 +57,11 @@ public class AttackLogInfoDao {
 	}
 	
 	/**
-	 * ·ÖÒ³²éÑ¯	
-	 * @param attackQuery Ìõ¼ş²éÑ¯µÄ¶ÔÏó
- 	 * @param start ²éÑ¯µÄÆğÊ¼¼ÇÂ¼
-	 * @param rows  ²éÑ¯µÄ¼ÇÂ¼ÌõÊı
-	 * @return  ¸ÃÒ³µÄ¹¥»÷ÈÕÖ¾¶ÔÏó¼¯ºÏ
+	 * åˆ†é¡µæŸ¥è¯¢	
+	 * @param attackQuery æ¡ä»¶æŸ¥è¯¢çš„å¯¹è±¡
+ 	 * @param start æŸ¥è¯¢çš„èµ·å§‹è®°å½•
+	 * @param rows  æŸ¥è¯¢çš„è®°å½•æ¡æ•°
+	 * @return  è¯¥é¡µçš„æ”»å‡»æ—¥å¿—å¯¹è±¡é›†åˆ
 	 */
 	@SuppressWarnings("unchecked")
 	public List<AttackLogInfo> queryAttackLog(AttackQuery attackQuery, Integer start, Integer rows){
@@ -75,10 +75,10 @@ public class AttackLogInfoDao {
 		if(attackQuery.getAttackType() != 999){
 			c.add(Restrictions.eq("attackType", attackQuery.getAttackType()));
 		}
-		if(!attackQuery.getSourceMac().equals("È«²¿")){
+		if(!attackQuery.getSourceMac().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("sourceMac", attackQuery.getSourceMac()));
 		}
-		if(!attackQuery.getTargetIp().equals("È«²¿")){
+		if(!attackQuery.getTargetIp().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("targetIp", attackQuery.getTargetIp()));
 		}
 		if(attackQuery.getTargetPort() != -1){

@@ -18,8 +18,8 @@ public class SystemOperateDao {
 	}
 	
 	/**
-	 * ²åÈë²Ù×÷ÈÕÖ¾
-	 * @param systemOperate  ĞèÒª²åÈëµÄÈÕÖ¾Êı¾İ
+	 * æ’å…¥æ“ä½œæ—¥å¿—
+	 * @param systemOperate  éœ€è¦æ’å…¥çš„æ—¥å¿—æ•°æ®
 	 */
 	public void insertOperateLog(SystemOperate systemOperate){
 		
@@ -29,8 +29,8 @@ public class SystemOperateDao {
 	}
 	
 	/**
-	 * É¾³ı²Ù×÷ÈÕÖ¾
-	 * @param systemOperate ĞèÒªÉ¾³ıµÄÈÕÖ¾Êı¾İ
+	 * åˆ é™¤æ“ä½œæ—¥å¿—
+	 * @param systemOperate éœ€è¦åˆ é™¤çš„æ—¥å¿—æ•°æ®
 	 */
 	public void deleteOperateLog(SystemOperate systemOperate){
 		
@@ -40,11 +40,11 @@ public class SystemOperateDao {
 	}
 	
 	/**
-	 *  ·ÖÒ³²éÑ¯
-	 * @param operate Òª²éÑ¯µÄĞÅÏ¢
-	 * @param start ²éÑ¯µÄÆğÊ¼Î»ÖÃ
-	 * @param rows Ã¿Ò³ÏÔÊ¾µÄĞĞÊı
-	 * @return ·µ»Ø²éÑ¯µ½µÄ½á¹ûĞÅÏ¢
+	 *  åˆ†é¡µæŸ¥è¯¢
+	 * @param operate è¦æŸ¥è¯¢çš„ä¿¡æ¯
+	 * @param start æŸ¥è¯¢çš„èµ·å§‹ä½ç½®
+	 * @param rows æ¯é¡µæ˜¾ç¤ºçš„è¡Œæ•°
+	 * @return è¿”å›æŸ¥è¯¢åˆ°çš„ç»“æœä¿¡æ¯
 	 */
 	@SuppressWarnings("unchecked")
 	public List<SystemOperate> queryOperateLog(SystemOperate operate, Integer start, Integer rows, String startTime, String endTime) {
@@ -52,20 +52,20 @@ public class SystemOperateDao {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria c = session.createCriteria(SystemOperate.class);
 		
-		if(!operate.getAccount().isEmpty() && !operate.getAccount().equals("È«²¿") ){
+		if(!operate.getAccount().isEmpty() && !operate.getAccount().equals("å…¨éƒ¨") ){
 			c.add(Restrictions.eq("account", operate.getAccount()));
 		}
-		if(!operate.getName().isEmpty() && !operate.getName().equals("È«²¿")){
+		if(!operate.getName().isEmpty() && !operate.getName().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("name", operate.getName()));
 		}
-		if(operate.getRole().equals("Éó¼Æ¹ÜÀíÔ±")){
-			c.add(Restrictions.ne("role", "ÏµÍ³¹ÜÀíÔ±"));
-			c.add(Restrictions.ne("role", "ÓÃ»§"));
-			c.add(Restrictions.ne("role", "°²È«¹ÜÀíÔ±"));
-		} else if(operate.getRole().equals("È«²¿")){
+		if(operate.getRole().equals("å®¡è®¡ç®¡ç†å‘˜")){
+			c.add(Restrictions.ne("role", "ç³»ç»Ÿç®¡ç†å‘˜"));
+			c.add(Restrictions.ne("role", "ç”¨æˆ·"));
+			c.add(Restrictions.ne("role", "å®‰å…¨ç®¡ç†å‘˜"));
+		} else if(operate.getRole().equals("å…¨éƒ¨")){
 			c.add(Restrictions.or(
-					Restrictions.eq("role", "°²È«¹ÜÀíÔ±"),
-					Restrictions.eq("role", "ÏµÍ³¹ÜÀíÔ±")
+					Restrictions.eq("role", "å®‰å…¨ç®¡ç†å‘˜"),
+					Restrictions.eq("role", "ç³»ç»Ÿç®¡ç†å‘˜")
 					));
 		} else {
 			c.add(Restrictions.eq("role", operate.getRole()));
@@ -81,29 +81,29 @@ public class SystemOperateDao {
 	}
 	
 	/**
-	 * ²éÑ¯×ÜÊı
-	 * @param operate Òª²éÑ¯µÄĞÅÏ¢
-	 * @return ·µ»Ø²éÑ¯µ½µÄ½á¹ûĞÅÏ¢
+	 * æŸ¥è¯¢æ€»æ•°
+	 * @param operate è¦æŸ¥è¯¢çš„ä¿¡æ¯
+	 * @return è¿”å›æŸ¥è¯¢åˆ°çš„ç»“æœä¿¡æ¯
 	 */
 	public Integer queryOperateAll(SystemOperate operate, String startTime, String endTime) {
 		
 		Session session = sessionFactory.getCurrentSession();
 		Criteria c = session.createCriteria(SystemOperate.class);
-		if(!operate.getAccount().isEmpty() && !operate.getAccount().equals("È«²¿") ){
+		if(!operate.getAccount().isEmpty() && !operate.getAccount().equals("å…¨éƒ¨") ){
 			c.add(Restrictions.eq("account", operate.getAccount()));
 		}
-		if(!operate.getName().isEmpty() && !operate.getName().equals("È«²¿")){
+		if(!operate.getName().isEmpty() && !operate.getName().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("name", operate.getName()));
 		}
 		
-		if(operate.getRole().equals("Éó¼Æ¹ÜÀíÔ±")){
-			c.add(Restrictions.ne("role", "ÏµÍ³¹ÜÀíÔ±"));
-			c.add(Restrictions.ne("role", "ÓÃ»§"));
-			c.add(Restrictions.ne("role", "°²È«¹ÜÀíÔ±"));
-		} else if(operate.getRole().equals("È«²¿")){
+		if(operate.getRole().equals("å®¡è®¡ç®¡ç†å‘˜")){
+			c.add(Restrictions.ne("role", "ç³»ç»Ÿç®¡ç†å‘˜"));
+			c.add(Restrictions.ne("role", "ç”¨æˆ·"));
+			c.add(Restrictions.ne("role", "å®‰å…¨ç®¡ç†å‘˜"));
+		} else if(operate.getRole().equals("å…¨éƒ¨")){
 			c.add(Restrictions.or(
-					Restrictions.eq("role", "°²È«¹ÜÀíÔ±"),
-					Restrictions.eq("role", "ÏµÍ³¹ÜÀíÔ±")
+					Restrictions.eq("role", "å®‰å…¨ç®¡ç†å‘˜"),
+					Restrictions.eq("role", "ç³»ç»Ÿç®¡ç†å‘˜")
 					));
 		}else{
 			c.add(Restrictions.eq("role", operate.getRole()));

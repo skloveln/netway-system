@@ -19,7 +19,7 @@ import cn.casnuc.service.SystemOperateService;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * ¶ÔÏµÍ³µÄÓÃ»§µÄ²Ù×÷ĞĞÎª½øĞĞ¼ÇÂ¼
+ * å¯¹ç³»ç»Ÿçš„ç”¨æˆ·çš„æ“ä½œè¡Œä¸ºè¿›è¡Œè®°å½•
  * @author kaka
  *
  */
@@ -43,7 +43,7 @@ public class SystemOperateAction extends ActionSupport{
 	}
 	
 	/**
-	 * ²éÑ¯ÈÕÖ¾
+	 * æŸ¥è¯¢æ—¥å¿—
 	 * @return
 	 */
 	public String queryOperate(){
@@ -51,7 +51,7 @@ public class SystemOperateAction extends ActionSupport{
 		User user = (User) ServletActionContext.getRequest().getSession().getAttribute("userinfo");
 		
 		if(user == null){
-			// ÓÃ»§Ê§Ğ§
+			// ç”¨æˆ·å¤±æ•ˆ
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.element("status", false);
 			setJsonResult(jsonObject);
@@ -59,7 +59,7 @@ public class SystemOperateAction extends ActionSupport{
 			return SUCCESS;			
 		}
 		
-		// ½ÓÊÕÊı¾İ
+		// æ¥æ”¶æ•°æ®
 		String account = request.getParameter("account");
 		String name = request.getParameter("name");
 		String role = request.getParameter("role");
@@ -73,32 +73,32 @@ public class SystemOperateAction extends ActionSupport{
 		Integer page = Integer.parseInt(pageStr);
 		Integer rows = Integer.parseInt(rowStr);
 		
-		// ·â×°Êı¾İ
+		// å°è£…æ•°æ®
 		SystemOperate operate = new SystemOperate();
 		operate.setAccount(account);	
 		operate.setName(name);
-		if(user.getRole().equals("°²È«¹ÜÀíÔ±")){
-			operate.setRole("Éó¼Æ¹ÜÀíÔ±");
-		}else if(user.getRole().equals("ÏµÍ³¹ÜÀíÔ±")){
-			operate.setRole("ÓÃ»§");
+		if(user.getRole().equals("å®‰å…¨ç®¡ç†å‘˜")){
+			operate.setRole("å®¡è®¡ç®¡ç†å‘˜");
+		}else if(user.getRole().equals("ç³»ç»Ÿç®¡ç†å‘˜")){
+			operate.setRole("ç”¨æˆ·");
 		}else{
 			operate.setRole(role);
 		}
 		
-		// Ìá½»µ½ÒµÎñ²ã²éÑ¯
+		// æäº¤åˆ°ä¸šåŠ¡å±‚æŸ¥è¯¢
 		PageInfo pageInfo = systemOperateService.queryOperateLog(operate, startTime, endTime, page, rows);
 		
-/*		// ¼ÇÂ¼ÈÕÖ¾
+/*		// è®°å½•æ—¥å¿—
 		SystemOperate systemOperate = new SystemOperate();
 		systemOperate.setAccount(user.getAccount());
-		systemOperate.setEvent("²é¿´ÁË²Ù×÷ÈÕÖ¾£¬ËÑË÷Ìõ¼ş£ºÓÃ»§Ãû="+account+",ĞÕÃû="+name+",½ÇÉ«="+ operate.getRole() + ",ÆğÊ¼Ê±¼ä="+startTime+",½ØÖ¹Ê±¼ä="+endTime);
+		systemOperate.setEvent("æŸ¥çœ‹äº†æ“ä½œæ—¥å¿—ï¼Œæœç´¢æ¡ä»¶ï¼šç”¨æˆ·å="+account+",å§“å="+name+",è§’è‰²="+ operate.getRole() + ",èµ·å§‹æ—¶é—´="+startTime+",æˆªæ­¢æ—¶é—´="+endTime);
 		systemOperate.setIp(request.getRemoteAddr());
 		systemOperate.setName(user.getName());
 		systemOperate.setRole(user.getRole());
 		systemOperate.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		systemOperateService.insertSystemOperateLog(systemOperate);
 */		
-		// ·â×°Json½á¹û
+		// å°è£…Jsonç»“æœ
 		JSONObject json = new JSONObject();
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put("total", pageInfo.getAllSize());
@@ -117,7 +117,7 @@ public class SystemOperateAction extends ActionSupport{
 		
 		if(user == null){
 			
-			// ÓÃ»§µÇÂ¼ĞÅÏ¢Ê§Ğ§
+			// ç”¨æˆ·ç™»å½•ä¿¡æ¯å¤±æ•ˆ
 			Map<String, Object> map = new LinkedHashMap<String, Object>();
 			map.put("status", false);
 			JSONObject resultJson = JSONObject.fromObject(map);
@@ -126,7 +126,7 @@ public class SystemOperateAction extends ActionSupport{
 			return SUCCESS;		
 		}
 		
-		// ¼ÇÂ¼ÈÕÖ¾
+		// è®°å½•æ—¥å¿—
 		SystemOperate systemOperate = new SystemOperate();
 		systemOperate.setAccount(user.getAccount());
 		systemOperate.setEvent(request.getParameter("event"));

@@ -68,9 +68,9 @@ public class ProtectResult {
 		}
 		
 		if(protectReturn.getProtectConfig().getNccheck() == 1){
-			this.nccheck = "×è¶Ï";
+			this.nccheck = "é˜»æ–­";
 		}else{
-			this.nccheck = "·Ç×è¶Ï";
+			this.nccheck = "éé˜»æ–­";
 		}
 		
 	}

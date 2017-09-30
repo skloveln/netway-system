@@ -17,13 +17,13 @@ public class SystemInterceptor implements Interceptor{
 
 	public String intercept(ActionInvocation invocation) throws Exception {
 		
-		// »ñÈ¡request¶ÔÏó
+		// è·å–requestå¯¹è±¡
 		HttpServletRequest request = ServletActionContext.getRequest();
 		
-		// »ñÈ¡actionµÄ´úÀí¶ÔÏó
+		// è·å–actionçš„ä»£ç†å¯¹è±¡
 		ActionProxy proxy = invocation.getProxy();
 		 
-		// »ñÈ¡µ±Ç°Ö´ĞĞµÄ·½·¨Ãû
+		// è·å–å½“å‰æ‰§è¡Œçš„æ–¹æ³•å
 		String methodName = proxy.getMethod();
 		String actionName = proxy.getActionName();
 		
@@ -31,19 +31,19 @@ public class SystemInterceptor implements Interceptor{
 			return invocation.invoke();
 		}
 		
-		// ¶ÔactionµÄ·ÃÎÊ×öÅĞ¶Ï
+		// å¯¹actionçš„è®¿é—®åšåˆ¤æ–­
 		if (!"login".equals(methodName)) {
-			// ÏÈ»ñÈ¡µ±Ç°µÇÂ½µÄÓÃ»§
+			// å…ˆè·å–å½“å‰ç™»é™†çš„ç”¨æˆ·
 			Object obj = request.getSession().getAttribute("userinfo");
 			if (obj == null) {
-				// Ã»ÓĞµÇÂ½
+				// æ²¡æœ‰ç™»é™†
 				return "relogin";
 			} else {
-				// µ±Ç°ÓÃ»§ÓĞµÇÂ½
+				// å½“å‰ç”¨æˆ·æœ‰ç™»é™†
 				return invocation.invoke();
 			}
 		} else {
-			// ËµÃ÷µ±Ç°ÓÃ»§ÕıÔÚµÇÂ½
+			// è¯´æ˜å½“å‰ç”¨æˆ·æ­£åœ¨ç™»é™†
 			return invocation.invoke();
 		}
 	}

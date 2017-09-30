@@ -1,7 +1,5 @@
 package cn.casnuc.action;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -15,14 +13,13 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import cn.casnuc.entity.AttackQuery;
 import cn.casnuc.entity.PageAttackLog;
-import cn.casnuc.entity.SystemOperate;
 import cn.casnuc.entity.User;
 import cn.casnuc.service.AttackLogInfoService;
 import cn.casnuc.service.SystemOperateService;
 import cn.casnuc.service.UserService;
 
 /**
- * ²é¿´µ¥µ¼Éè±¸µÄ¹¥»÷ÈÕÖ¾ĞÅÏ¢
+ * æŸ¥çœ‹å•å¯¼è®¾å¤‡çš„æ”»å‡»æ—¥å¿—ä¿¡æ¯
  * @author kaka
  *
  */
@@ -60,7 +57,7 @@ public class AttackLogInfoAction extends ActionSupport{
 	
 	public String queryResult(){
 		
-		// ½ÓÊÕÌá½»µÄÊı¾İ
+		// æ¥æ”¶æäº¤çš„æ•°æ®
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String pageStr = request.getParameter("page");
 		String rowStr = request.getParameter("rows");
@@ -72,14 +69,14 @@ public class AttackLogInfoAction extends ActionSupport{
 		String start = request.getParameter("startTime");
 		String end = request.getParameter("endTime");
 		
-		// ×ª»»Êı¾İÀàĞÍ
+		// è½¬æ¢æ•°æ®ç±»å‹
 		if(pageStr == null || pageStr.trim().length() == 0){
 			pageStr = "1";
 		}
 		Integer page = Integer.parseInt(pageStr);
 		Integer rows = Integer.parseInt(rowStr);
 		
-		// ·â×°Ìõ¼ş²éÑ¯¶ÔÏó
+		// å°è£…æ¡ä»¶æŸ¥è¯¢å¯¹è±¡
 		AttackQuery myAttackQuery = new AttackQuery();
 		myAttackQuery.setAttackTarget(attackTarget);
 		myAttackQuery.setAttackType(attackType);
@@ -89,10 +86,10 @@ public class AttackLogInfoAction extends ActionSupport{
 		myAttackQuery.setTargetIp(targetIp);
 		myAttackQuery.setTargetPort(targetPort);
 		
-		// Ìá½»µ½ÒµÎñ²ã²éÑ¯
+		// æäº¤åˆ°ä¸šåŠ¡å±‚æŸ¥è¯¢
 		PageAttackLog pageResult = attackLogInfoService.queryAttackLog(myAttackQuery, page, rows);
 		
-		// ·â×°³ÉJson¶ÔÏó
+		// å°è£…æˆJsonå¯¹è±¡
 		Map<String, Object> map = new LinkedHashMap<String,Object>();
 		map.put("total", pageResult.getAllRecord());
 		map.put("rows", pageResult.getList());		
@@ -112,7 +109,7 @@ public class AttackLogInfoAction extends ActionSupport{
 		
 		if(user == null){
 			
-			// ÓÃ»§µÇÂ¼ĞÅÏ¢Ê§Ğ§
+			// ç”¨æˆ·ç™»å½•ä¿¡æ¯å¤±æ•ˆ
 			Map<String, Object> map = new LinkedHashMap<String, Object>();
 			map.put("status", false);
 			JSONObject resultJson = JSONObject.fromObject(map);

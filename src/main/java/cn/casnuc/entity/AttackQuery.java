@@ -11,9 +11,9 @@ public class AttackQuery {
 	private String targetPort;
 	
 	public int getAttackTarget() {		
-		if(attackTarget.equals("ÒµÎñ¶Ë")){
+		if(attackTarget.equals("ä¸šåŠ¡ç«¯")){
 			return 1;
-		}else if(attackTarget.equals("¹ÜÀí¶Ë")){
+		}else if(attackTarget.equals("ç®¡ç†ç«¯")){
 			return 2;
 		}else {
 			return 999;
@@ -23,13 +23,13 @@ public class AttackQuery {
 		this.attackTarget = attackTarget;
 	}
 	public int getAttackType() {
-		if(attackType.equals("¶Ë¿ÚÉ¨Ãè")){
+		if(attackType.equals("ç«¯å£æ‰«æ")){
 			return 1;
-		}else if(attackType.equals("ICMP¹¥»÷")){
+		}else if(attackType.equals("ICMPæ”»å‡»")){
 			return 2;
-		}else if(attackType.equals("SYN¹¥»÷")){
+		}else if(attackType.equals("SYNæ”»å‡»")){
 			return 3;
-		}else if(attackType.equals("UDP¹¥»÷")){
+		}else if(attackType.equals("UDPæ”»å‡»")){
 			return 4;
 		}else {
 			return 999;
@@ -63,7 +63,7 @@ public class AttackQuery {
 		this.targetIp = targetIp;
 	}
 	public int getTargetPort() {
-		if(targetPort.equals("È«²¿")){
+		if(targetPort.equals("å…¨éƒ¨")){
 			return -1;
 		}else{
 			return Integer.parseInt(targetPort);

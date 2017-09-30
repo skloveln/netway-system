@@ -24,31 +24,31 @@ public class ProtectLogInfoService {
 	}
 	
 	/**
-	 * ÒµÎñ²ã 
-	 * @param object ²éÑ¯Ìõ¼ş
-	 * @param page	²éÑ¯Ò³Âë
-	 * @param rows	Ò³ÃæĞĞÊı
-	 * @return ·â×°ºÃµÄ·ÖÒ³½á¹û¶ÔÏó
+	 * ä¸šåŠ¡å±‚ 
+	 * @param object æŸ¥è¯¢æ¡ä»¶
+	 * @param page	æŸ¥è¯¢é¡µç 
+	 * @param rows	é¡µé¢è¡Œæ•°
+	 * @return å°è£…å¥½çš„åˆ†é¡µç»“æœå¯¹è±¡
 	 */
 	public PageProtectLog queryProtectLog(DataQuery object, Integer page, Integer rows) {
 		
 		PageProtectLog pageProtectLog = new PageProtectLog();
 		
-		// ¼ÆËãÆğÊ¼µØÖ·
+		// è®¡ç®—èµ·å§‹åœ°å€
 		Integer start = (page - 1) * rows + 1;
 		
-		// ·â×°Ã¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı
+		// å°è£…æ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°
 		pageProtectLog.setPerPageSize(rows);
 		
-		// ·â×°·ÖÒ³½á¹û
+		// å°è£…åˆ†é¡µç»“æœ
 		List<ProtectLogInfo> list = protectLogInfoDao.queryProtectLog(object, start, rows);
 		pageProtectLog.setpLogList(list);
 		
-		// ·â×°×Ü¼ÇÂ¼Êı
+		// å°è£…æ€»è®°å½•æ•°
 		Integer allRecord = protectLogInfoDao.queryProtectLog(object).size();
 		pageProtectLog.setAllRecordNO(allRecord);
 		
-		// ·â×°×ÜÒ³Êı
+		// å°è£…æ€»é¡µæ•°
 		Integer allPage = null;
 		if(allRecord % pageProtectLog.getPerPageSize() == 0){
 			allPage = allRecord / pageProtectLog.getPerPageSize();

@@ -16,30 +16,30 @@ public class AttackLogInfoService {
 	}
 	
 	/**
-	 * ·ÖÒ³²éÑ¯
-	 * @param query Ìõ¼ş²éÑ¯¶ÔÏó
-	 * @param page  ²éÑ¯µÄÒ³Êı
-	 * @param rows	Ã¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı
-	 * @return	²éÑ¯½á¹û¶ÔÏó
+	 * åˆ†é¡µæŸ¥è¯¢
+	 * @param query æ¡ä»¶æŸ¥è¯¢å¯¹è±¡
+	 * @param page  æŸ¥è¯¢çš„é¡µæ•°
+	 * @param rows	æ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°
+	 * @return	æŸ¥è¯¢ç»“æœå¯¹è±¡
 	 */
 	public PageAttackLog queryAttackLog(AttackQuery query, Integer page, Integer rows){
 		
 		PageAttackLog pageAttackLog = new PageAttackLog();
 		
-		// ¼ÆËã²éÑ¯µÄÆğÊ¼Î»ÖÃ
+		// è®¡ç®—æŸ¥è¯¢çš„èµ·å§‹ä½ç½®
 		Integer start = (page - 1) * rows;
 		
-		// µ÷ÓÃDAO²ã²éÑ¯
+		// è°ƒç”¨DAOå±‚æŸ¥è¯¢
 		Integer allSize = attackLogInfoDao.queryAttackLog(query);
 		List<AttackLogInfo> pageList = attackLogInfoDao.queryAttackLog(query, start, rows);
 		
-		// ·â×°×Ü¼ÇÂ¼Êı
+		// å°è£…æ€»è®°å½•æ•°
 		pageAttackLog.setAllRecord(allSize);
 
-		// ·â×°Ã¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı
+		// å°è£…æ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°
 		pageAttackLog.setPerPageSize(rows);
 		
-		// ·â×°×ÜÒ³Êı
+		// å°è£…æ€»é¡µæ•°
 		Integer allPage = null;
 		if(allSize % rows == 0){
 			allPage = allSize / rows;
@@ -48,7 +48,7 @@ public class AttackLogInfoService {
 		}
 		pageAttackLog.setAllPageSize(allPage);
 		
-		// ·â×°²éÑ¯½á¹û
+		// å°è£…æŸ¥è¯¢ç»“æœ
 		pageAttackLog.setList(pageList);
 		
 		return pageAttackLog;

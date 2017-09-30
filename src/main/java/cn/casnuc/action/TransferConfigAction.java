@@ -14,7 +14,7 @@ import cn.casnuc.service.TransferConfigService;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * ²é¿´µ¥µ¼ÉÏµÄ´«Êä·şÎñÅäÖÃĞÅÏ¢
+ * æŸ¥çœ‹å•å¯¼ä¸Šçš„ä¼ è¾“æœåŠ¡é…ç½®ä¿¡æ¯
  * @author kaka
  *
  */
@@ -50,16 +50,16 @@ public class TransferConfigAction extends ActionSupport{
 			return "relogin";
 		}
 		
-		// ²é¿´·À»¤ÅäÖÃ
+		// æŸ¥çœ‹é˜²æŠ¤é…ç½®
 		TransferConfig transferConfig = transferConfigService.queryTransferConfig();
 		
-		//·â×°´«Êä½á¹û
+		//å°è£…ä¼ è¾“ç»“æœ
 		setTransferResult(transferConfig);
 		
-		// ¼ÇÂ¼ÈÕÖ¾
+		// è®°å½•æ—¥å¿—
 		SystemOperate systemOperate = new SystemOperate();
 		systemOperate.setAccount(user.getAccount());
-		systemOperate.setEvent("²é¿´ÁË´«Êä·şÎñÅäÖÃĞÅÏ¢");
+		systemOperate.setEvent("æŸ¥çœ‹äº†ä¼ è¾“æœåŠ¡é…ç½®ä¿¡æ¯");
 		systemOperate.setIp(ServletActionContext.getRequest().getRemoteAddr());
 		systemOperate.setName(user.getName());
 		systemOperate.setRole(user.getRole());

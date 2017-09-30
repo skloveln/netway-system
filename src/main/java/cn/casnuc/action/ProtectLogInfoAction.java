@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * ²é¿´ÒµÎñ·À»¤ÈÕÖ¾ĞÅÏ¢
+ * æŸ¥çœ‹ä¸šåŠ¡é˜²æŠ¤æ—¥å¿—ä¿¡æ¯
  * @author kaka
  *
  */
@@ -93,7 +93,7 @@ public class ProtectLogInfoAction extends ActionSupport{
 			return "relogin";
 		}else{			
 			
-			System.out.println(user.getName() + "²éÑ¯ÁË·À»¤ÈÕÖ¾ĞÅÏ¢");
+			System.out.println(user.getName() + "æŸ¥è¯¢äº†é˜²æŠ¤æ—¥å¿—ä¿¡æ¯");
 			
 			return queryProtectLog(dataQuery);	
 		}
@@ -105,7 +105,7 @@ public class ProtectLogInfoAction extends ActionSupport{
 		
 		if(user == null){
 			
-			// ÓÃ»§µÇÂ¼ĞÅÏ¢Ê§Ğ§
+			// ç”¨æˆ·ç™»å½•ä¿¡æ¯å¤±æ•ˆ
 			Map<String, Object> map = new LinkedHashMap<String,Object>();
 			map.put("status", false);			
 			JSONObject resultJson = JSONObject.fromObject(map);
@@ -118,12 +118,12 @@ public class ProtectLogInfoAction extends ActionSupport{
 			
 			DataQuery myDataQuery = new DataQuery();
 			
-			// ½ÓÊÕÒªÏÔÊ¾µÄÒ³ÂëºÍĞĞÊı
+			// æ¥æ”¶è¦æ˜¾ç¤ºçš„é¡µç å’Œè¡Œæ•°
 			HttpServletRequest request = ServletActionContext.getRequest();
 			String pageStr = request.getParameter("page");
 			String rowsStr = request.getParameter("rows");
 			
-			// ½ÓÊÕ²éÑ¯Ìõ¼ş
+			// æ¥æ”¶æŸ¥è¯¢æ¡ä»¶
 			myDataQuery.setFileName(request.getParameter("fileName"));
 			myDataQuery.setTransferDrection(request.getParameter("transferDrection"));
 			myDataQuery.setTransferResult(request.getParameter("transferResult"));
@@ -134,17 +134,17 @@ public class ProtectLogInfoAction extends ActionSupport{
 			myDataQuery.setDestinationIp(request.getParameter("destinationIp"));
 			myDataQuery.setDestinationMac(request.getParameter("destinationMac"));
 			
-			// Êı¾İÀàĞÍ×ª»»
+			// æ•°æ®ç±»å‹è½¬æ¢
 			if(pageStr == null || pageStr.trim().length() == 0){
 				pageStr = "1";
 			}
 			Integer page = Integer.parseInt(pageStr);
 			Integer rows = Integer.parseInt(rowsStr);
 /*			
-			// ¼ÇÂ¼ÈÕÖ¾
+			// è®°å½•æ—¥å¿—
 			SystemOperate systemOperate = new SystemOperate();
 			systemOperate.setAccount(user.getAccount());
-			systemOperate.setEvent("²é¿´ÁË·À»¤ÈÕÖ¾");
+			systemOperate.setEvent("æŸ¥çœ‹äº†é˜²æŠ¤æ—¥å¿—");
 			systemOperate.setIp(request.getRemoteAddr());
 			systemOperate.setName(user.getName());
 			systemOperate.setRole(user.getRole());
@@ -159,10 +159,10 @@ public class ProtectLogInfoAction extends ActionSupport{
 	
 	private String queryProtectLog(DataQuery dataQuery, Integer page,  Integer rows) {
 		
-		//½ÓÊÕ²éÑ¯½á¹û
+		//æ¥æ”¶æŸ¥è¯¢ç»“æœ
 		PageProtectLog result = protectLogInfoService.queryProtectLog(dataQuery, page, rows);		
 		
-		//·â×°³Éjson¶ÔÏó
+		//å°è£…æˆjsonå¯¹è±¡
 		Map<String, Object> map = new LinkedHashMap<String,Object>();		
 		map.put("total", result.getAllRecordNO());		
 		map.put("rows", result.getpLogList());

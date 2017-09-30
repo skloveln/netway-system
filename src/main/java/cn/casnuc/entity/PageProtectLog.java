@@ -5,11 +5,11 @@ import java.util.List;
 
 public class PageProtectLog {
 	
-	private Integer currPageNO;		//µ±Ç°Ò³ºÅOK
-	private Integer perPageSize = 9;	//Ã¿Ò³ÏÔÊ¾¼ÇÂ¼Êı£¬Ä¬ÈÏÎª3Ìõ¼ÇÂ¼OK
-	private Integer allRecordNO;	//×Ü¼ÇÂ¼ÊıOK
-	private Integer allPageNO;	//×ÜÒ³ºÅOK
-	private List<ProtectLogInfo> pLogList = new ArrayList<ProtectLogInfo>();//¸Ã±¾Ò³ÏÔÊ¾µÄÄÚÈİOK
+	private Integer currPageNO;		//å½“å‰é¡µå·OK
+	private Integer perPageSize = 9;	//æ¯é¡µæ˜¾ç¤ºè®°å½•æ•°ï¼Œé»˜è®¤ä¸º3æ¡è®°å½•OK
+	private Integer allRecordNO;	//æ€»è®°å½•æ•°OK
+	private Integer allPageNO;	//æ€»é¡µå·OK
+	private List<ProtectLogInfo> pLogList = new ArrayList<ProtectLogInfo>();//è¯¥æœ¬é¡µæ˜¾ç¤ºçš„å†…å®¹OK
 	
 	public Integer getCurrPageNO() {
 		return currPageNO;

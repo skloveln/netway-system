@@ -17,7 +17,7 @@ import cn.casnuc.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * É¾³ıÓÃ»§£¨°üÀ¨¹ÜÀíÔ±ºÍÓÃ»§£©
+ * åˆ é™¤ç”¨æˆ·ï¼ˆåŒ…æ‹¬ç®¡ç†å‘˜å’Œç”¨æˆ·ï¼‰
  * @author kaka
  *
  */
@@ -46,11 +46,11 @@ public class DeleteUserAction extends ActionSupport{
 	
 	@Override
 	public String execute() throws Exception {
-		// ÅĞ¶ÏÓÃ»§ĞÅÏ¢ÊÇ·ñÓĞĞ§
+		// åˆ¤æ–­ç”¨æˆ·ä¿¡æ¯æ˜¯å¦æœ‰æ•ˆ
 		User user = (User)ServletActionContext.getRequest().getSession().getAttribute("userinfo");
 		if(user == null){			
 			
-			// ·â×°JSON¶ÔÏó·µ»Ø½á¹û
+			// å°è£…JSONå¯¹è±¡è¿”å›ç»“æœ
 			JSONObject json = new JSONObject();
 			json.element("status", false);
 			setJsonResult(json);			
@@ -61,25 +61,25 @@ public class DeleteUserAction extends ActionSupport{
 			HttpServletRequest request = ServletActionContext.getRequest();
 			String account = request.getParameter("account");
 			
-			// ·â×°ÒªÉ¾³ıµÄÓÃ»§
+			// å°è£…è¦åˆ é™¤çš„ç”¨æˆ·
 			User removeUser = new User();
 			removeUser.setAccount(account);			
 			
-			// µ÷ÓÃÒµÎñ²ã
+			// è°ƒç”¨ä¸šåŠ¡å±‚
 			removeUser = userService.deleteUser(removeUser);
 			
-			//¼ÇÂ¼²Ù×÷ÈÕÖ¾
+			//è®°å½•æ“ä½œæ—¥å¿—
 			SystemOperate systemOperate = new SystemOperate();
 			systemOperate.setAccount(user.getAccount());
-			systemOperate.setEvent("É¾³ıÁËÓÃ»§£¬ÓÃ»§ÃûÎª"+removeUser.getAccount() + "£¬ĞÕÃûÎª"+removeUser.getName());
+			systemOperate.setEvent("åˆ é™¤äº†ç”¨æˆ·ï¼Œç”¨æˆ·åä¸º"+removeUser.getAccount() + "ï¼Œå§“åä¸º"+removeUser.getName());
 			systemOperate.setIp(request.getRemoteAddr());
 			systemOperate.setName(user.getName());
 			systemOperate.setRole(user.getRole());
 			systemOperate.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-			systemOperate.setRemarks("±»É¾³ı½ÇÉ«Îª" + removeUser.getRole());
+			systemOperate.setRemarks("è¢«åˆ é™¤è§’è‰²ä¸º" + removeUser.getRole());
 			systemOperateService.insertSystemOperateLog(systemOperate);
 			
-			// ·µ»Øjson¶ÔÏó
+			// è¿”å›jsonå¯¹è±¡
 			JSONObject json = new JSONObject();
 			json.element("status", true); 
 			setJsonResult(json);			

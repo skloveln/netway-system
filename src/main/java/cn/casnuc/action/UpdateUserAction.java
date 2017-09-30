@@ -21,7 +21,7 @@ import cn.casnuc.service.SystemOperateService;
 import cn.casnuc.service.UserService;
 
 /**
- * ¸üĞÂÏµÍ³ÉÏµÄÓÃ»§µÄĞÅÏ¢
+ * æ›´æ–°ç³»ç»Ÿä¸Šçš„ç”¨æˆ·çš„ä¿¡æ¯
  * @author kaka
  *
  */
@@ -55,17 +55,17 @@ public class UpdateUserAction extends ActionSupport{
 			return "relogin";
 		}
 		
-		// »ñÈ¡ÒªĞŞ¸ÄµÄĞÅÏ¢²¢·â×°
+		// è·å–è¦ä¿®æ”¹çš„ä¿¡æ¯å¹¶å°è£…
 		String name = request.getParameter("name");
 		user.setName(name);
 		
-		// Ìá½»µ½ÒµÎñ²ã´¦Àí
+		// æäº¤åˆ°ä¸šåŠ¡å±‚å¤„ç†
 		String rusult = userService.updateUser(user);
 		
-		// ¼ÇÂ¼ÈÕÖ¾
+		// è®°å½•æ—¥å¿—
 		SystemOperate systemOperate = new SystemOperate();
 		systemOperate.setAccount(user.getAccount());
-		systemOperate.setEvent("ĞŞ¸ÄÁË¸öÈËĞÅÏ¢");
+		systemOperate.setEvent("ä¿®æ”¹äº†ä¸ªäººä¿¡æ¯");
 		systemOperate.setIp(request.getRemoteAddr());
 		systemOperate.setName(user.getName());
 		systemOperate.setRole(user.getRole());
@@ -77,7 +77,7 @@ public class UpdateUserAction extends ActionSupport{
 	}
 	
 	/**
-	 * ĞŞ¸ÄÃÜÂë
+	 * ä¿®æ”¹å¯†ç 
 	 * @return
 	 */
 	public String modifyPassword() {
@@ -91,15 +91,15 @@ public class UpdateUserAction extends ActionSupport{
 		String newPw = request.getParameter("newpassword");
 		
 		if(!oldPw.equals(user.getPassword())){
-			toResult(user, "Ô­ÃÜÂë´íÎó","user_modifyPassword");
+			toResult(user, "åŸå¯†ç é”™è¯¯","user_modifyPassword");
 		} else {
 			
 			user.setPassword(newPw);
 			
-			// ¼ÇÂ¼ÈÕÖ¾
+			// è®°å½•æ—¥å¿—
 			SystemOperate systemOperate = new SystemOperate();
 			systemOperate.setAccount(user.getAccount());
-			systemOperate.setEvent("ĞŞ¸ÄÁËÃÜÂë");
+			systemOperate.setEvent("ä¿®æ”¹äº†å¯†ç ");
 			systemOperate.setIp(request.getRemoteAddr());
 			systemOperate.setName(user.getName());
 			systemOperate.setRole(user.getRole());
@@ -127,21 +127,21 @@ public class UpdateUserAction extends ActionSupport{
 	}
 	
 	/**
-	 * ¸üĞÂÓÃ»§ĞÅÏ¢
+	 * æ›´æ–°ç”¨æˆ·ä¿¡æ¯
 	 * @return
 	 */
 	public String updateInfoJson(){
 		
 		User user = (User) request.getSession().getAttribute("userinfo");	
 		if(user == null){
-			// ·â×°JSON¶ÔÏó·µ»Ø½á¹û
+			// å°è£…JSONå¯¹è±¡è¿”å›ç»“æœ
 			JSONObject json = new JSONObject();
 			json.element("status", false);
 			setJsonResult(json);
 			
 		}else{
 			
-			// ½ÓÊÜĞèÒªĞŞ¸ÄµÄÊı¾İ
+			// æ¥å—éœ€è¦ä¿®æ”¹çš„æ•°æ®
 			String account = request.getParameter("account");
 			String name = request.getParameter("name");
 			
@@ -153,10 +153,10 @@ public class UpdateUserAction extends ActionSupport{
 			boolean protectLog = Boolean.parseBoolean(request.getParameter("protectLog"));
 			boolean transferConfig = Boolean.parseBoolean(request.getParameter("transferConfig"));
 			
-			// ²éÕÒÒªĞŞ¸ÄĞÅÏ¢µÄÓÃ»§
+			// æŸ¥æ‰¾è¦ä¿®æ”¹ä¿¡æ¯çš„ç”¨æˆ·
 			User updateUser = userService.findByAccount(account);
 			
-			// ĞŞ¸ÄĞÅÏ¢
+			// ä¿®æ”¹ä¿¡æ¯
 			Permission permission = updateUser.getPermission();
 			permission.setAttackLog(attackLog);
 			permission.setGatewayConfig(gatewayConfig);
@@ -167,13 +167,13 @@ public class UpdateUserAction extends ActionSupport{
 			permission.setTransferConfig(transferConfig);			
 			updateUser.setName(name);
 			
-			// Ìá½»¸üĞÂĞÅÏ¢
+			// æäº¤æ›´æ–°ä¿¡æ¯
 			userService.updateUser(updateUser);
 			
-			//¼ÇÂ¼²Ù×÷ÈÕÖ¾
+			//è®°å½•æ“ä½œæ—¥å¿—
 			SystemOperate systemOperate = new SystemOperate();
 			systemOperate.setAccount(user.getAccount());
-			systemOperate.setEvent("ĞŞ¸ÄÁËÓÃ»§ĞÅÏ¢£¬ĞÕÃû¸ÄÎª"+updateUser.getName()+",È¨ÏŞ¸ÄÎª"+
+			systemOperate.setEvent("ä¿®æ”¹äº†ç”¨æˆ·ä¿¡æ¯ï¼Œå§“åæ”¹ä¸º"+updateUser.getName()+",æƒé™æ”¹ä¸º"+
 					updateUser.getPermission().getGatewayConfig()+","+
 					updateUser.getPermission().getKeywordConfig()+","+
 					updateUser.getPermission().getProtectConfig()+","+
@@ -185,10 +185,10 @@ public class UpdateUserAction extends ActionSupport{
 			systemOperate.setName(user.getName());
 			systemOperate.setRole(user.getRole());
 			systemOperate.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-			systemOperate.setRemarks("È¨ÏŞÒÀ´ÎÎªÍø¹ØÅäÖÃ¡¢¹Ø¼ü×ÖÅäÖÃ¡¢·À»¤ÅäÖÃ¡¢´«ÊäÅäÖÃ¡¢¹¥»÷ÈÕÖ¾¡¢²Ù×÷ÈÕÖ¾ºÍ·À»¤ÈÕÖ¾");
+			systemOperate.setRemarks("æƒé™ä¾æ¬¡ä¸ºç½‘å…³é…ç½®ã€å…³é”®å­—é…ç½®ã€é˜²æŠ¤é…ç½®ã€ä¼ è¾“é…ç½®ã€æ”»å‡»æ—¥å¿—ã€æ“ä½œæ—¥å¿—å’Œé˜²æŠ¤æ—¥å¿—");
 			systemOperateService.insertSystemOperateLog(systemOperate);
 			
-			// ·â×°JSON¶ÔÏó·µ»Ø½á¹û
+			// å°è£…JSONå¯¹è±¡è¿”å›ç»“æœ
 			JSONObject json = new JSONObject();
 			json.element("status", true);
 			setJsonResult(json);
@@ -198,7 +198,7 @@ public class UpdateUserAction extends ActionSupport{
 	}
 	
 	/**
-	 * ¸üĞÂ¹ÜÀíÔ±ĞÅÏ¢
+	 * æ›´æ–°ç®¡ç†å‘˜ä¿¡æ¯
 	 * @return
 	 */
 	public String updateAdmin(){
@@ -206,37 +206,37 @@ public class UpdateUserAction extends ActionSupport{
 		User user = (User) request.getSession().getAttribute("userinfo");	
 		if(user == null){
 			
-			// ·â×°JSON¶ÔÏó·µ»Ø½á¹û
+			// å°è£…JSONå¯¹è±¡è¿”å›ç»“æœ
 			JSONObject json = new JSONObject();
 			json.element("status", false);
 			setJsonResult(json);
 			
 		}else{
 			
-			// ½ÓÊÜĞèÒªĞŞ¸ÄµÄÊı¾İ
+			// æ¥å—éœ€è¦ä¿®æ”¹çš„æ•°æ®
 			String account = request.getParameter("account");
 			String name = request.getParameter("name");
 						
-			// ²éÕÒÒªĞŞ¸ÄĞÅÏ¢µÄÓÃ»§
+			// æŸ¥æ‰¾è¦ä¿®æ”¹ä¿¡æ¯çš„ç”¨æˆ·
 			User updateUser = userService.findByAccount(account);
 			
-			// ĞŞ¸ÄĞÅÏ¢
+			// ä¿®æ”¹ä¿¡æ¯
 			updateUser.setName(name);
 			
-			// Ìá½»¸üĞÂĞÅÏ¢
+			// æäº¤æ›´æ–°ä¿¡æ¯
 			userService.updateUser(updateUser);
 			
-			// ¼ÇÂ¼²Ù×÷ÈÕÖ¾
+			// è®°å½•æ“ä½œæ—¥å¿—
 			SystemOperate systemOperate = new SystemOperate();
 			systemOperate.setAccount(user.getAccount());
-			systemOperate.setEvent("ĞŞ¸ÄÁË¹ÜÀíÔ±ĞÅÏ¢£¬ĞÕÃû¸ÄÎª"+updateUser.getName());
+			systemOperate.setEvent("ä¿®æ”¹äº†ç®¡ç†å‘˜ä¿¡æ¯ï¼Œå§“åæ”¹ä¸º"+updateUser.getName());
 			systemOperate.setIp(request.getRemoteAddr());
 			systemOperate.setName(user.getName());
 			systemOperate.setRole(user.getRole());
 			systemOperate.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 			systemOperateService.insertSystemOperateLog(systemOperate);
 			
-			// ·â×°JSON¶ÔÏó·µ»Ø½á¹û
+			// å°è£…JSONå¯¹è±¡è¿”å›ç»“æœ
 			JSONObject json = new JSONObject();
 			json.element("status", true);
 			setJsonResult(json);

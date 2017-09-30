@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.casnuc.entity">
+
+	<class name="TransferConfig" table="传输服务配置表">
+		<composite-id>
+			<key-property name="inNetIp">
+                <column name="内网IP地址" />
+          	</key-property>          
+        	<key-property name="outNetIp">
+                <column name="外网IP地址" />
+           	</key-property>
+		</composite-id>
+		<property name="inNetMac" column="内网MAC地址"></property>
+		<property name="inNetPort" column="内网MAC端口号"></property>
+		<property name="outNetMac" column="外网MAC地址"></property>
+		<property name="outNetPort" column="外网端口号"></property>
+		<property name="serviceType" column="服务类型"></property>
+		<property name="transferDirection" column="传输方向"></property>
+		<property name="transferCount" column="传输次数"></property>
+		<property name="remarks" column="备注"></property>
+		
+	</class>
+
+</hibernate-mapping>
+
+
+

@@ -17,7 +17,7 @@ public class ProtectConfigDao {
 	}
 
 	/**
-	 * ²éÑ¯·À»¤²ßÂÔÅäÖÃ
+	 * æŸ¥è¯¢é˜²æŠ¤ç­–ç•¥é…ç½®
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")

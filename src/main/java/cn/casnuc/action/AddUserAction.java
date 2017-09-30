@@ -24,7 +24,7 @@ import cn.casnuc.service.SystemOperateService;
 import cn.casnuc.service.UserService;
 
 /**
- * Ôö¼ÓÓÃ»§£¨°üÀ¨ÈıÔ±ºÍÆÕÍ¨ÓÃ»§£©
+ * å¢åŠ ç”¨æˆ·ï¼ˆåŒ…æ‹¬ä¸‰å‘˜å’Œæ™®é€šç”¨æˆ·ï¼‰
  * @author kaka
  *
  */
@@ -51,7 +51,7 @@ public class AddUserAction extends ActionSupport{
 		this.user = user;
 	}
 	public JSONObject getResult() {
-//		System.out.println("get·½·¨·µ»ØµÄdata:"+result.toString());
+//		System.out.println("getæ–¹æ³•è¿”å›çš„data:"+result.toString());
 		return result;
 	}
 	public void setResult(JSONObject result) {
@@ -69,11 +69,11 @@ public class AddUserAction extends ActionSupport{
 		} else {
 			
 			String result = null;
-			if (loginUser.getRole().equals("ÏµÍ³¹ÜÀíÔ±")) {
+			if (loginUser.getRole().equals("ç³»ç»Ÿç®¡ç†å‘˜")) {
 				result = addSysAdmin(user, loginUser);
-			} else if (loginUser.getRole().equals("°²È«¹ÜÀíÔ±")) {
+			} else if (loginUser.getRole().equals("å®‰å…¨ç®¡ç†å‘˜")) {
 				result = addSafeAdmin(user, loginUser);
-			} else if (loginUser.getRole().equals("Éó¼Æ¹ÜÀíÔ±")) {
+			} else if (loginUser.getRole().equals("å®¡è®¡ç®¡ç†å‘˜")) {
 				result = addAuditAdmin(user, loginUser);
 			}
 			
@@ -85,9 +85,9 @@ public class AddUserAction extends ActionSupport{
 	
 	private String addSysAdmin(User user, User loginUser){
 		
-		if (user.getRole().equals("ÏµÍ³¹ÜÀíÔ±")) {
+		if (user.getRole().equals("ç³»ç»Ÿç®¡ç†å‘˜")) {
 			
-			//·â×°¶ÔÏó
+			//å°è£…å¯¹è±¡
 			Permission permission = new Permission();
   			permission.setKeywordConfig(false);
 			permission.setOperateLog(false);
@@ -98,10 +98,10 @@ public class AddUserAction extends ActionSupport{
 			permission.setProtectLog(false);			
 			user.setPermission(permission);
 			
-			// ¼ÇÂ¼ÈÕÖ¾
+			// è®°å½•æ—¥å¿—
 			SystemOperate systemOperate = new SystemOperate();
 			systemOperate.setAccount(loginUser.getAccount());
-			systemOperate.setEvent("Ôö¼ÓÁËÏµÍ³¹ÜÀíÔ±"+ user.getAccount()+ "  " +user.getName());
+			systemOperate.setEvent("å¢åŠ äº†ç³»ç»Ÿç®¡ç†å‘˜"+ user.getAccount()+ "  " +user.getName());
 			systemOperate.setIp(request.getRemoteAddr());
 			systemOperate.setName(loginUser.getName());
 			systemOperate.setRole(loginUser.getRole());
@@ -112,8 +112,8 @@ public class AddUserAction extends ActionSupport{
 			
 		} else {
 			
-			//·â×°ÓÃ»§
-			user.setRole("ÓÃ»§");
+			//å°è£…ç”¨æˆ·
+			user.setRole("ç”¨æˆ·");
 			Permission permission = new Permission();
 			permission.setKeywordConfig(conversionData(request.getParameter("keywordConfig")));
 			permission.setOperateLog(conversionData(request.getParameter("operateLog")));
@@ -124,10 +124,10 @@ public class AddUserAction extends ActionSupport{
 			permission.setProtectLog(conversionData(request.getParameter("protectLog")));
 			user.setPermission(permission);
 			
-			// ¼ÇÂ¼ÈÕÖ¾
+			// è®°å½•æ—¥å¿—
 			SystemOperate systemOperate = new SystemOperate();
 			systemOperate.setAccount(loginUser.getAccount());
-			systemOperate.setEvent("Ôö¼ÓÁËÓÃ»§"+user.getAccount()+"  "+user.getName());
+			systemOperate.setEvent("å¢åŠ äº†ç”¨æˆ·"+user.getAccount()+"  "+user.getName());
 			systemOperate.setIp(request.getRemoteAddr());
 			systemOperate.setName(loginUser.getName());
 			systemOperate.setRole(loginUser.getRole());
@@ -140,8 +140,8 @@ public class AddUserAction extends ActionSupport{
 	
 	private String addAuditAdmin(User user, User loginUser) {
 
-		//·â×°¶ÔÏó
-		user.setRole("Éó¼Æ¹ÜÀíÔ±");
+		//å°è£…å¯¹è±¡
+		user.setRole("å®¡è®¡ç®¡ç†å‘˜");
 		Permission permission = new Permission();
 		permission.setKeywordConfig(false);
 		permission.setOperateLog(false);
@@ -152,10 +152,10 @@ public class AddUserAction extends ActionSupport{
 		permission.setProtectLog(false);		
 		user.setPermission(permission);
 		
-		// ¼ÇÂ¼ÈÕÖ¾
+		// è®°å½•æ—¥å¿—
 		SystemOperate systemOperate = new SystemOperate();
 		systemOperate.setAccount(loginUser.getAccount());
-		systemOperate.setEvent("Ôö¼ÓÁËÉó¼Æ¹ÜÀíÔ±"+user.getAccount()+"  "+user.getName());
+		systemOperate.setEvent("å¢åŠ äº†å®¡è®¡ç®¡ç†å‘˜"+user.getAccount()+"  "+user.getName());
 		systemOperate.setIp(request.getRemoteAddr());
 		systemOperate.setName(loginUser.getName());
 		systemOperate.setRole(loginUser.getRole());
@@ -167,8 +167,8 @@ public class AddUserAction extends ActionSupport{
 	
 	private String addSafeAdmin(User user, User loginUser) {
 		
-		// ·â×°¶ÔÏó
-		user.setRole("°²È«¹ÜÀíÔ±");
+		// å°è£…å¯¹è±¡
+		user.setRole("å®‰å…¨ç®¡ç†å‘˜");
 		Permission permission = new Permission();
 		permission.setKeywordConfig(false);
 		permission.setOperateLog(false);
@@ -179,10 +179,10 @@ public class AddUserAction extends ActionSupport{
 		permission.setProtectLog(false);	
 		user.setPermission(permission);
 		
-		// ¼ÇÂ¼²Ù×÷ÈÕÖ¾¡¢
+		// è®°å½•æ“ä½œæ—¥å¿—ã€
 		SystemOperate systemOperate = new SystemOperate();
 		systemOperate.setAccount(loginUser.getAccount());
-		systemOperate.setEvent("Ôö¼ÓÁË°²È«¹ÜÀíÔ±"+user.getAccount()+"  "+user.getName());
+		systemOperate.setEvent("å¢åŠ äº†å®‰å…¨ç®¡ç†å‘˜"+user.getAccount()+"  "+user.getName());
 		systemOperate.setIp(request.getRemoteAddr());
 		systemOperate.setName(loginUser.getName());
 		systemOperate.setRole(loginUser.getRole());
@@ -193,18 +193,18 @@ public class AddUserAction extends ActionSupport{
 	}
 	
 	/**
-	 * µ÷ÓÃÒµÎñ²ãÔö¼ÓÓÃ»§
-	 * @param user	ÒªÌí¼ÓµÄÓÃ»§
-	 * @return ÒÔ×Ö·û´®·µ»Ø½á¹ûĞÅÏ¢
+	 * è°ƒç”¨ä¸šåŠ¡å±‚å¢åŠ ç”¨æˆ·
+	 * @param user	è¦æ·»åŠ çš„ç”¨æˆ·
+	 * @return ä»¥å­—ç¬¦ä¸²è¿”å›ç»“æœä¿¡æ¯
 	 */
 	private String addUser(User user) {
 		return userService.addUser(user);		
 	}
 	
 	/**
-	 * ½«StringÀàĞÍµÄÈ¨ÏŞ×ª»»ÎªbooleanÀàĞÍ
-	 * @param string Òª×ª»»µÄ×Ö·û×ª
-	 * @return ·µ»ØbooleanÀàĞÍ
+	 * å°†Stringç±»å‹çš„æƒé™è½¬æ¢ä¸ºbooleanç±»å‹
+	 * @param string è¦è½¬æ¢çš„å­—ç¬¦è½¬
+	 * @return è¿”å›booleanç±»å‹
 	 */
 	private boolean conversionData(String string){
 		if(string != null && string.equals("true")){
@@ -218,11 +218,11 @@ public class AddUserAction extends ActionSupport{
 		
 		String url = null;
 		
-		if(role.equals("ÏµÍ³¹ÜÀíÔ±")){
+		if(role.equals("ç³»ç»Ÿç®¡ç†å‘˜")){
 			url = "user_add";
-		}else if(role.equals("Éó¼Æ¹ÜÀíÔ±")){
+		}else if(role.equals("å®¡è®¡ç®¡ç†å‘˜")){
 			url = "user_add_audit";
-		}else if(role.equals("°²È«¹ÜÀíÔ±")){
+		}else if(role.equals("å®‰å…¨ç®¡ç†å‘˜")){
 			url = "user_add_safe";
 		}
 		
@@ -239,12 +239,12 @@ public class AddUserAction extends ActionSupport{
 	}
 	
 	/**
-	 * ¼ì²âÓÃ»§ÃûÊÇ·ñ´æÔÚ
+	 * æ£€æµ‹ç”¨æˆ·åæ˜¯å¦å­˜åœ¨
 	 * @return
 	 */
 	public String queryUserAccount(){
 		
-		String account = request.getParameter("account");		// »ñÈ¡Êı¾İ
+		String account = request.getParameter("account");		// è·å–æ•°æ®
 
 		User queryUser = new User();
 		queryUser.setAccount(account);
@@ -256,7 +256,7 @@ public class AddUserAction extends ActionSupport{
 			map.put("result", true);
 		}
 		
-		JSONObject json = JSONObject.fromObject(map);// ½«map¶ÔÏó×ª»»³ÉjsonÀàĞÍÊı¾İ
+		JSONObject json = JSONObject.fromObject(map);// å°†mapå¯¹è±¡è½¬æ¢æˆjsonç±»å‹æ•°æ®
 		
 		setResult(json);
 		

@@ -9,14 +9,14 @@ import cn.casnuc.entity.User;
 
 public class UserService {
 	
-	// IOC×¢Èë
+	// IOCæ³¨å…¥
 	private UserDao userDao;
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 
 	/**
-	 * µÇÂ¼²éÑ¯
+	 * ç™»å½•æŸ¥è¯¢
 	 * @param emp
 	 */
 	public User findByAccountAndPass(String account, String password) {
@@ -25,14 +25,14 @@ public class UserService {
 	}
 	
 	/**
-	 * Ôö¼ÓÓÃ»§
+	 * å¢åŠ ç”¨æˆ·
 	 */
 	public String addUser(User user){
 		return userDao.addUser(user);
 	}
 	
 	/**
-	 * ¸üĞÂÓÃ»§ĞÅÏ¢
+	 * æ›´æ–°ç”¨æˆ·ä¿¡æ¯
 	 * @param user
 	 * @return
 	 */
@@ -42,30 +42,30 @@ public class UserService {
 	}
 
 	/**
-	 * Ìõ¼ş²éÑ¯
-	 * @param user	²éÑ¯Ìõ¼ş¶ÔÏó
+	 * æ¡ä»¶æŸ¥è¯¢
+	 * @param user	æŸ¥è¯¢æ¡ä»¶å¯¹è±¡
 	 */
 	public List<User> queryUser(User user) {
 		return userDao.queryUser(user);
 	}
 	
 	/**
-	 * ·ÖÒ³²éÑ¯ÓÃ»§
-	 * @param user	²éÑ¯Ìõ¼ş¶ÔÏó
-	 * @return	µ±Ç°Ò³½á¹û¶ÔÏó
+	 * åˆ†é¡µæŸ¥è¯¢ç”¨æˆ·
+	 * @param user	æŸ¥è¯¢æ¡ä»¶å¯¹è±¡
+	 * @return	å½“å‰é¡µç»“æœå¯¹è±¡
 	 */
 	public PageInfo queryUser(User user, Integer page, Integer rows) {
 		
 		PageInfo pageInfo = new PageInfo();
 		
-		// ¼ÆËã²éÑ¯µÄÆğÊ¼½Úµã
+		// è®¡ç®—æŸ¥è¯¢çš„èµ·å§‹èŠ‚ç‚¹
 		Integer start = (page - 1) * rows;
 				
-		// ²éÑ¯½á¹û
+		// æŸ¥è¯¢ç»“æœ
 		List<?> list = userDao.queryUser(user, start, rows);
 		Integer allSize = userDao.queryUser(user).size();
 		
-		// ¼ÆËã×ÜÒ³Êı
+		// è®¡ç®—æ€»é¡µæ•°
 		Integer allPage = null;
 		if(allSize % rows == 0){
 			allPage = allSize / rows;
@@ -73,7 +73,7 @@ public class UserService {
 			allPage = allSize / rows + 1;
 		}
 				
-		// ·â×°²éÑ¯½á¹û
+		// å°è£…æŸ¥è¯¢ç»“æœ
 		pageInfo.setPerPageSize(rows);
 		pageInfo.setAllPage(allPage);
 		pageInfo.setAllSize(allSize);
@@ -84,14 +84,14 @@ public class UserService {
 	}
 	
 	/**
-	 * É¾³ıÖ¸¶¨ÓÃ»§
-	 * @param removeUser ĞèÒªÉ¾³ıµÄÓÃ»§
-	 * @return true É¾³ı³É¹¦£¬ false ÎŞ´ËÓÃ»§
+	 * åˆ é™¤æŒ‡å®šç”¨æˆ·
+	 * @param removeUser éœ€è¦åˆ é™¤çš„ç”¨æˆ·
+	 * @return true åˆ é™¤æˆåŠŸï¼Œ false æ— æ­¤ç”¨æˆ·
 	 */
 	public User deleteUser(User user) {
-		// ²éÕÒÓÃ»§
+		// æŸ¥æ‰¾ç”¨æˆ·
 		user = userDao.findUserByAccount(user.getAccount());
-		// ÕÒµ½ÓÃ»§ÔòÉ¾³ı
+		// æ‰¾åˆ°ç”¨æˆ·åˆ™åˆ é™¤
 		if(user != null){
 			userDao.deleteUser(user);
 		}
@@ -100,27 +100,27 @@ public class UserService {
 	}
 	
 	/**
-	 * ¸ù¾İÓÃ»§Ãû²éÕÒ³öÖ¸¶¨ÓÃ»§
-	 * @param account ÓÃ»§Ãû
-	 * @return ĞèÒª²éÕÒµÄÓÃ»§¶ÔÏó
+	 * æ ¹æ®ç”¨æˆ·åæŸ¥æ‰¾å‡ºæŒ‡å®šç”¨æˆ·
+	 * @param account ç”¨æˆ·å
+	 * @return éœ€è¦æŸ¥æ‰¾çš„ç”¨æˆ·å¯¹è±¡
 	 */
 	public User findByAccount(String account) {
 		return userDao.findUserByAccount(account);
 	}
 	
 	/**
-	 * ¸ù¾İÓÃ»§ÃûÅĞ¶ÏÕË»§ÊÇ·ñ±»Ëø¶¨
-	 * @param account ÓÃ»§Ãû
-	 * @return true ±»Ëø¶¨£¬ false Ã»ÓĞ±»Ëø¶¨
+	 * æ ¹æ®ç”¨æˆ·ååˆ¤æ–­è´¦æˆ·æ˜¯å¦è¢«é”å®š
+	 * @param account ç”¨æˆ·å
+	 * @return true è¢«é”å®šï¼Œ false æ²¡æœ‰è¢«é”å®š
 	 */
 	public boolean isLock(String account){
 		return userDao.isLock(account);
 	}
 	
 	/**
-	 * ¸ù¾İÓÃ»§Ãû·µ»ØËø¶¨Ê±¼ä
-	 * @param account ÓÃ»§Ãû
-	 * @return true ±»Ëø¶¨£¬ false Ã»ÓĞ±»Ëø¶¨
+	 * æ ¹æ®ç”¨æˆ·åè¿”å›é”å®šæ—¶é—´
+	 * @param account ç”¨æˆ·å
+	 * @return true è¢«é”å®šï¼Œ false æ²¡æœ‰è¢«é”å®š
 	 */
 	public Date lockTime(String account) {
 		return userDao.lockTime(account);

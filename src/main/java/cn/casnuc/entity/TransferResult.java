@@ -69,15 +69,15 @@ public class TransferResult {
 		outNetMac = toMac(transferConfig.getOutNetMac());
 		
 		if(transferConfig.getTransferDirection() == 1){
-			transferDirection = "µ¥Ïòµ¼Èë";
+			transferDirection = "å•å‘å¯¼å…¥";
 		}else{
-			transferDirection = "µ¥Ïòµ¼³ö";
+			transferDirection = "å•å‘å¯¼å‡º";
 		}
 		
 		if(transferConfig.getServiceType() == 1){
-			serviceType = "MDC·şÎñ";
+			serviceType = "MDCæœåŠ¡";
 		}else{
-			serviceType = "DNC·şÎñ";
+			serviceType = "DNCæœåŠ¡";
 		}
 
 		transferCount= ""+transferConfig.getTransferCount();
@@ -86,13 +86,13 @@ public class TransferResult {
 	}
 	
 	/**
-	 * ½«Êı¾İ×ª»»ÎªIPµØÖ·
+	 * å°†æ•°æ®è½¬æ¢ä¸ºIPåœ°å€
 	 * @param num
 	 * @return
 	 */
 	public String inet_ntoa(Integer num) {  
 		
-		//×ª»»ÎªÎŞ·ûºÅÊı
+		//è½¬æ¢ä¸ºæ— ç¬¦å·æ•°
 		long addr = num & 0x0FFFFFFFFl;
 		
 		return ((addr & 0xff000000) >> 24) + "." + ((addr & 0xff0000) >> 16)  
@@ -100,8 +100,8 @@ public class TransferResult {
 	}
 	
 	/**
-	 * ½«Êı¾İ×ª»»ÎªMACµØÖ·
-	 * @param num Êı¾İÔ´
+	 * å°†æ•°æ®è½¬æ¢ä¸ºMACåœ°å€
+	 * @param num æ•°æ®æº
 	 * @return
 	 */
 	public String toMac(Long num){

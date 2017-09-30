@@ -17,7 +17,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * ²é¿´·À»¤²ßÂÔÅäÖÃĞÅÏ¢
+ * æŸ¥çœ‹é˜²æŠ¤ç­–ç•¥é…ç½®ä¿¡æ¯
  * @author kaka
  *
  */
@@ -52,16 +52,16 @@ public class ProtectConfigAction extends ActionSupport{
 			return "relogin";
 		}
 		
-		//²éÑ¯·À»¤ÅäÖÃ
+		//æŸ¥è¯¢é˜²æŠ¤é…ç½®
 		ProtectReturn pr = protectConfigService.queryProtectConfig();
 		setProtectResult(pr);
 		Map<String, Object> map = ActionContext.getContext().getContextMap();
 		map.put("key", pr.getList());
 		
-		//¼ÇÂ¼²Ù×÷ÈÕÖ¾
+		//è®°å½•æ“ä½œæ—¥å¿—
 		SystemOperate systemOperate = new SystemOperate();
 		systemOperate.setAccount(user.getAccount());
-		systemOperate.setEvent("²é¿´ÁË·À»¤²ßÂÔÅäÖÃĞÅÏ¢");
+		systemOperate.setEvent("æŸ¥çœ‹äº†é˜²æŠ¤ç­–ç•¥é…ç½®ä¿¡æ¯");
 		systemOperate.setIp(ServletActionContext.getRequest().getRemoteAddr());
 		systemOperate.setName(user.getName());
 		systemOperate.setRole(user.getRole());

@@ -3,13 +3,13 @@ package cn.casnuc.entity;
 public class Permission {
 	
 	private int id;
-	private boolean protectLog; // ·À»¤ÈÕÖ¾
-	private boolean attackLog;	// ¹¥»÷ÈÕÖ¾
-	private boolean operateLog;	// ²Ù×÷ÈÕÖ¾
-	private boolean transferConfig; // ´«ÊäÅäÖÃ
-	private boolean protectConfig; // ·À»¤ÅäÖÃ
-	private boolean keywordConfig; // ¹Ø¼ü´ÊÅäÖÃ
-	private boolean gatewayConfig; // Íø¹ØÅäÖÃ
+	private boolean protectLog; // é˜²æŠ¤æ—¥å¿—
+	private boolean attackLog;	// æ”»å‡»æ—¥å¿—
+	private boolean operateLog;	// æ“ä½œæ—¥å¿—
+	private boolean transferConfig; // ä¼ è¾“é…ç½®
+	private boolean protectConfig; // é˜²æŠ¤é…ç½®
+	private boolean keywordConfig; // å…³é”®è¯é…ç½®
+	private boolean gatewayConfig; // ç½‘å…³é…ç½®
 	
 	public int getId() {
 		return id;

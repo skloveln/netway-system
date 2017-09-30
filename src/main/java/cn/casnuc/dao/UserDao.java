@@ -9,22 +9,21 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
 
-import cn.casnuc.entity.Permission;
 import cn.casnuc.entity.User;
 
 public class UserDao {
 	
-	// ×¢ÈëSessionFactory¶ÔÏó
+	// æ³¨å…¥SessionFactoryå¯¹è±¡
 	private SessionFactory sessionFactory;
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 		
 	/**
-	 * ¸ù¾İÓÃ»§ÃûºÍÃÜÂë²éÕÒÓÃ»§
- 	 * @param account ÓÃ»§Ãû
-	 * @param password ÃÜÂë
-	 * @return ·µ»Ø²éÕÒµ½µÄÓÃ»§
+	 * æ ¹æ®ç”¨æˆ·åå’Œå¯†ç æŸ¥æ‰¾ç”¨æˆ·
+ 	 * @param account ç”¨æˆ·å
+	 * @param password å¯†ç 
+	 * @return è¿”å›æŸ¥æ‰¾åˆ°çš„ç”¨æˆ·
 	 */
 	public User findByAccountAndPass(String account, String password ) {
 		Session sesssion = sessionFactory.getCurrentSession();
@@ -34,16 +33,16 @@ public class UserDao {
 		List<User> list = query.list();
 		
 		if(list.size() == 0) {
-			return null;	//Î´ÕÒµ½Õâ¸öÓÃ»§
+			return null;	//æœªæ‰¾åˆ°è¿™ä¸ªç”¨æˆ·
 		}else{
 			return (User)list.get(0);
 		}	
 	}
 	
 	/**
-	 * ¸ù¾İÓÃ»§Ãû²éÕÒÓÃ»§
-	 * @param account ÓÃ»§Ãû
-	 * @return ·µ»ØÕÒµ½µÄÓÃ»§£¬Ã»ÕÒµ½·µ»Ønull
+	 * æ ¹æ®ç”¨æˆ·åæŸ¥æ‰¾ç”¨æˆ·
+	 * @param account ç”¨æˆ·å
+	 * @return è¿”å›æ‰¾åˆ°çš„ç”¨æˆ·ï¼Œæ²¡æ‰¾åˆ°è¿”å›null
 	 */
 	public User findUserByAccount(String account){
 		Session sesssion = sessionFactory.getCurrentSession();
@@ -52,14 +51,14 @@ public class UserDao {
 		List<User> list = query.list();
 		
 		if(list.size() == 0) {
-			return null;	//Î´ÕÒµ½Õâ¸öÓÃ»§
+			return null;	//æœªæ‰¾åˆ°è¿™ä¸ªç”¨æˆ·
 		}else{
 			return (User)list.get(0);
 		}
 	}
 	
 	/**
-	 * Ìí¼ÓÓÃ»§
+	 * æ·»åŠ ç”¨æˆ·
 	 */
 	public String addUser(User user){		
 		Session sesssion = sessionFactory.getCurrentSession();
@@ -68,16 +67,16 @@ public class UserDao {
 		List<User> list = query.list();
 		if(list.size() == 0){
 			sesssion.save(user);
-			return "Ìí¼Ó³É¹¦";
+			return "æ·»åŠ æˆåŠŸ";
 		}else{
-			return "ÓÃ»§ÃûÒÑ¾­´æÔÚ";
+			return "ç”¨æˆ·åå·²ç»å­˜åœ¨";
 		}		
 	}
 	
 	/**
-	 * É¾³ıÖ¸¶¨ÓÃ»§
-	 * @param user ÒªÉ¾³ıµÄÓÃ»§
-	 * @return true É¾³ı³É¹¦  false Ã»ÓĞ¸ÃÓÃ»§
+	 * åˆ é™¤æŒ‡å®šç”¨æˆ·
+	 * @param user è¦åˆ é™¤çš„ç”¨æˆ·
+	 * @return true åˆ é™¤æˆåŠŸ  false æ²¡æœ‰è¯¥ç”¨æˆ·
 	 */
 	public void deleteUser(User user){
 		
@@ -88,7 +87,7 @@ public class UserDao {
 	}
 	
 	/**
-	 * ¸üĞÂÓÃ»§ĞÅÏ¢
+	 * æ›´æ–°ç”¨æˆ·ä¿¡æ¯
 	 * @param user
 	 * @return
 	 */
@@ -97,24 +96,24 @@ public class UserDao {
 		Session sesssion = sessionFactory.getCurrentSession();
 		sesssion.update(user);
 		
-		return "¸üĞÂ³É¹¦";		
+		return "æ›´æ–°æˆåŠŸ";		
 	}
 	
 	/**
-	 * ·ÖÒ³²éÑ¯
-	 * @param user ²éÑ¯µÄÌõ¼ş¶ÔÏó
-	 * @param start ¿ªÊ¼²éÑ¯µÄÎ»ÖÃ
-	 * @param rows ²éÑ¯µÄĞÅÏ¢ÌõÊı
-	 * @return ÓÃ»§½á¹û¼¯ºÏ
+	 * åˆ†é¡µæŸ¥è¯¢
+	 * @param user æŸ¥è¯¢çš„æ¡ä»¶å¯¹è±¡
+	 * @param start å¼€å§‹æŸ¥è¯¢çš„ä½ç½®
+	 * @param rows æŸ¥è¯¢çš„ä¿¡æ¯æ¡æ•°
+	 * @return ç”¨æˆ·ç»“æœé›†åˆ
 	 */
 	public List<User> queryUser(User user, Integer start, Integer rows){
 		
 		Session session = sessionFactory.getCurrentSession();
 		Criteria c = session.createCriteria(User.class);
-		if(!user.getName().isEmpty() && !user.getName().equals("È«²¿")){
+		if(!user.getName().isEmpty() && !user.getName().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("name", user.getName()));
 		}
-		if(!user.getAccount().isEmpty() && !user.getAccount().equals("È«²¿")){
+		if(!user.getAccount().isEmpty() && !user.getAccount().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("account", user.getAccount()));
 		}
 		if(user.getRole() != null){
@@ -130,18 +129,18 @@ public class UserDao {
 	}
 	
 	/**
-	 * ²éÑ¯·ûºÏÌõ¼şµÄ¼ÇÂ¼×ÜÊı
-	 * @param user Ìõ¼ş²éÑ¯¶ÔÏó
-	 * @return ·ûºÏÌõ¼şµÄ¼ÇÂ¼×ÜÊı
+	 * æŸ¥è¯¢ç¬¦åˆæ¡ä»¶çš„è®°å½•æ€»æ•°
+	 * @param user æ¡ä»¶æŸ¥è¯¢å¯¹è±¡
+	 * @return ç¬¦åˆæ¡ä»¶çš„è®°å½•æ€»æ•°
 	 */
 	public List<User> queryUser(User user){
 		
 		Session session = sessionFactory.getCurrentSession();
 		Criteria c = session.createCriteria(User.class);
-		if(user.getName() != null && !user.getName().equals("È«²¿")){
+		if(user.getName() != null && !user.getName().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("name", user.getName()));
 		}
-		if(user.getAccount() != null && !user.getAccount().equals("È«²¿")){
+		if(user.getAccount() != null && !user.getAccount().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("account", user.getAccount()));
 		}
 		if(user.getRole() != null){
@@ -152,9 +151,9 @@ public class UserDao {
 	}
 
 	/**
-	 * ¸ù¾İÓÃ»§ÃûÅĞ¶ÏÕË»§ÊÇ·ñ±»Ëø¶¨
-	 * @param account ÓÃ»§Ãû
-	 * @return true ±»Ëø¶¨£¬ false Ã»ÓĞ±»Ëø¶¨
+	 * æ ¹æ®ç”¨æˆ·ååˆ¤æ–­è´¦æˆ·æ˜¯å¦è¢«é”å®š
+	 * @param account ç”¨æˆ·å
+	 * @return true è¢«é”å®šï¼Œ false æ²¡æœ‰è¢«é”å®š
 	 */
 	public boolean isLock(String account) {
 		
@@ -167,9 +166,9 @@ public class UserDao {
 	}
 	
 	/**
-	 * ¸ù¾İÓÃ»§Ãû·µ»ØËø¶¨Ê±¼ä
-	 * @param account ÓÃ»§Ãû
-	 * @return true ±»Ëø¶¨£¬ false Ã»ÓĞ±»Ëø¶¨
+	 * æ ¹æ®ç”¨æˆ·åè¿”å›é”å®šæ—¶é—´
+	 * @param account ç”¨æˆ·å
+	 * @return true è¢«é”å®šï¼Œ false æ²¡æœ‰è¢«é”å®š
 	 */
 	public Date lockTime(String account) {
 		

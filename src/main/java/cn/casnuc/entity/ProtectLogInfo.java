@@ -1,7 +1,5 @@
 package cn.casnuc.entity;
 
-import java.util.Date;
-
 public class ProtectLogInfo {
 	
 	private int id;

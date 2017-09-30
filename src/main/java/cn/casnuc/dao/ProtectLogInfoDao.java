@@ -14,7 +14,7 @@ import cn.casnuc.entity.ProtectLogInfo;
 
 public class ProtectLogInfoDao {
 		
-	// ×¢ÈëSessionFactory¶ÔÏó
+	// æ³¨å…¥SessionFactoryå¯¹è±¡
 	private SessionFactory sessionFactory;
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -22,7 +22,7 @@ public class ProtectLogInfoDao {
 	}
 		
 	/**
-	 * Ìõ¼ş²éÑ¯,¸ù¾İÊ±¼ä²éÑ¯
+	 * æ¡ä»¶æŸ¥è¯¢,æ ¹æ®æ—¶é—´æŸ¥è¯¢
 	 */
 	public List<ProtectLogInfo> findByDate(String start, String end){		
 		Session sesssion = sessionFactory.getCurrentSession();
@@ -40,9 +40,9 @@ public class ProtectLogInfoDao {
 	}
 	
 	/**
-	 * ²éÑ¯¼ÇÂ¼×ÜÊı
-	 * @param object ²éÑ¯Ìõ¼ş¶ÔÏó
-	 * @return ¼ÇÂ¼×ÜÊı
+	 * æŸ¥è¯¢è®°å½•æ€»æ•°
+	 * @param object æŸ¥è¯¢æ¡ä»¶å¯¹è±¡
+	 * @return è®°å½•æ€»æ•°
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ProtectLogInfo> queryProtectLog(DataQuery object){
@@ -50,7 +50,7 @@ public class ProtectLogInfoDao {
 		Session sesssion = sessionFactory.getCurrentSession();
 		Criteria c = sesssion.createCriteria(ProtectLogInfo.class);
 		
-		if(!object.getFileName().isEmpty() && !object.getFileName().equals("È«²¿")){
+		if(!object.getFileName().isEmpty() && !object.getFileName().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("fileName", object.getFileName()));
 		}	
 		if(object.getTransferDrection() == 1 || object.getTransferDrection() == 2){
@@ -66,10 +66,10 @@ public class ProtectLogInfoDao {
 	}
 	
 	/**
-	 * ·ÖÒ³²éÑ¯
-	 * @param object  ²éÑ¯Ìõ¼ş¶ÔÏó
-	 * @param start   ´ÓµÚ¼¸Ìõ¿ªÊ¼²éÑ¯£¬£¨´Ó0¿ªÊ¼Ëã£©
-	 * @param rows	    ²éÑ¯¶àÉÙÌõ¼ÇÂ¼	
+	 * åˆ†é¡µæŸ¥è¯¢
+	 * @param object  æŸ¥è¯¢æ¡ä»¶å¯¹è±¡
+	 * @param start   ä»ç¬¬å‡ æ¡å¼€å§‹æŸ¥è¯¢ï¼Œï¼ˆä»0å¼€å§‹ç®—ï¼‰
+	 * @param rows	    æŸ¥è¯¢å¤šå°‘æ¡è®°å½•	
 	 * @return
 	 */
 	public List<ProtectLogInfo> queryProtectLog(DataQuery object, int start, int rows){
@@ -77,7 +77,7 @@ public class ProtectLogInfoDao {
 		Session sesssion = sessionFactory.getCurrentSession();
 		Criteria c = sesssion.createCriteria(ProtectLogInfo.class);
 		
-		if(!object.getFileName().isEmpty() && !object.getFileName().equals("È«²¿")){
+		if(!object.getFileName().isEmpty() && !object.getFileName().equals("å…¨éƒ¨")){
 			c.add(Restrictions.eq("fileName", object.getFileName()));
 		}	
 		if(object.getTransferDrection() == 1 || object.getTransferDrection() == 2){

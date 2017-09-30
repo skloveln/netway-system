@@ -15,8 +15,8 @@ public class SystemOperateService {
 	}
 	
 	/**
-	 * ²åÈë²Ù×÷ÈÕÖ¾Êı¾İ
-	 * @param systemOperate ĞèÒªÔö¼ÓµÄÊı¾İ
+	 * æ’å…¥æ“ä½œæ—¥å¿—æ•°æ®
+	 * @param systemOperate éœ€è¦å¢åŠ çš„æ•°æ®
 	 */
 	public void insertSystemOperateLog(SystemOperate systemOperate){
 		
@@ -25,8 +25,8 @@ public class SystemOperateService {
 	}
 	
 	/**
-	 * É¾³ı²Ù×÷ÈÕÖ¾Êı¾İ
-	 * @param systemOperate ĞèÒªÉ¾³ıµÄÄ¿±ê¶ÔÏó
+	 * åˆ é™¤æ“ä½œæ—¥å¿—æ•°æ®
+	 * @param systemOperate éœ€è¦åˆ é™¤çš„ç›®æ ‡å¯¹è±¡
 	 */
 	public void deleteSystemOperateLog(SystemOperate systemOperate){
 		
@@ -34,23 +34,23 @@ public class SystemOperateService {
 	}
 	
 	/**
-	 * ·ÖÒ³²éÑ¯²Ù×÷ÈÕÖ¾
-	 * @param operate Òª²éÑ¯µÄĞÅÏ¢
-	 * @param page	µÚ¼¸Ò³
-	 * @param rows	Ã¿Ò³µÄĞĞÊı
+	 * åˆ†é¡µæŸ¥è¯¢æ“ä½œæ—¥å¿—
+	 * @param operate è¦æŸ¥è¯¢çš„ä¿¡æ¯
+	 * @param page	ç¬¬å‡ é¡µ
+	 * @param rows	æ¯é¡µçš„è¡Œæ•°
 	 */
 	public PageInfo queryOperateLog(SystemOperate operate, String startTime, String endTime, Integer page, Integer rows) {
 		
 		PageInfo pageInfo = new PageInfo();
 		
-		// ¼ÆËã²éÑ¯µÄÆğÊ¼Î»ÖÃ
+		// è®¡ç®—æŸ¥è¯¢çš„èµ·å§‹ä½ç½®
 		Integer start = (page - 1) * rows;
 		
-		// µ÷ÓÃDao²ã²éÑ¯
+		// è°ƒç”¨Daoå±‚æŸ¥è¯¢
 		List list = systemOperateDao.queryOperateLog(operate, start, rows, startTime, endTime);
 		Integer allSize = systemOperateDao.queryOperateAll(operate, startTime, endTime);
 		
-		// ¼ÆËã×ÜÒ³Êı
+		// è®¡ç®—æ€»é¡µæ•°
 		Integer allPage = null;
 		if(allSize % rows == 0){
 			allPage = allSize / rows;
@@ -58,7 +58,7 @@ public class SystemOperateService {
 			allPage = allSize / rows + 1;
 		}
 		
-		// ·â×°½á¹û
+		// å°è£…ç»“æœ
 		pageInfo.setAllPage(allPage);
 		pageInfo.setAllSize(allSize);
 		pageInfo.setCurrentPage(page);

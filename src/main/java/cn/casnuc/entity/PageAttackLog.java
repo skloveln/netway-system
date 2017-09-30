@@ -4,11 +4,11 @@ import java.util.List;
 
 public class PageAttackLog {
 	
-	private Integer allPageSize;	// ×ÜÒ³Êı
-	private Integer allRecord;		// ×Ü¼ÇÂ¼Êı
-	private Integer perPageSize;	// Ã¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı
-	private Integer currentPage; 	// µ±Ç°Ò³Êı
-	private List<AttackLogInfo> list; // µ±Ç°Ò³µÄ½á¹û¼¯ºÏ
+	private Integer allPageSize;	// æ€»é¡µæ•°
+	private Integer allRecord;		// æ€»è®°å½•æ•°
+	private Integer perPageSize;	// æ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°
+	private Integer currentPage; 	// å½“å‰é¡µæ•°
+	private List<AttackLogInfo> list; // å½“å‰é¡µçš„ç»“æœé›†åˆ
 	
 	public Integer getAllPageSize() {
 		return allPageSize;

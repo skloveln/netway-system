@@ -20,7 +20,7 @@ import cn.casnuc.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * ÓÃ»§µÇÂ¼µÄAction
+ * ç”¨æˆ·ç™»å½•çš„Action
  * @author kaka
  *
  */
@@ -64,58 +64,58 @@ public class UserAction extends ActionSupport{
 	}
 	
 	/**
-	 * ÓÃ»§µÇÂ¼
+	 * ç”¨æˆ·ç™»å½•
 	 */
 	public String login(){		
 		
 		try{
 			if(this.loginUser != null && (this.loginUser.getAccount() != null || this.loginUser.getPassword() != null)){			
 				
-				//ÅĞ¶ÏÕË»§ÊÇ·ñ´æÔÚ
+				//åˆ¤æ–­è´¦æˆ·æ˜¯å¦å­˜åœ¨
 				User account = userService.findByAccount(this.loginUser.getAccount());
 				if(account == null){				
-					loginResult = "ÓÃ»§Ãû²»´æÔÚ£¡";
+					loginResult = "ç”¨æˆ·åä¸å­˜åœ¨ï¼";
 					return toLoginUI();
 				}
 				
-				//ÅĞ¶ÏÕË»§ÊÇ·ñËø¶¨
+				//åˆ¤æ–­è´¦æˆ·æ˜¯å¦é”å®š
 				if(account.getFlag()){
 					
-					//ÅĞ¶ÏËø¶¨Ê±¼äÊÇ·ñ»¹ÓĞĞ§
+					//åˆ¤æ–­é”å®šæ—¶é—´æ˜¯å¦è¿˜æœ‰æ•ˆ
 					if(isLimit(account.getTime())){
-						loginResult = "¸ÃÕÊºÅ±»Ëø¶¨£¬ÇëÉÔºóÔÙÊÔ£¡";					
+						loginResult = "è¯¥å¸å·è¢«é”å®šï¼Œè¯·ç¨åå†è¯•ï¼";					
 						return toLoginUI();
 					}
 					
-					//½â³ıÏŞÖÆ
-					account.setFlag(false);				//½«ÏŞÖÆ±êÖ¾ÖµÎªfalse
-					account.setCount(0);				//½«ÃÜÂëÊä´í´ÎÊıÖÃ0
+					//è§£é™¤é™åˆ¶
+					account.setFlag(false);				//å°†é™åˆ¶æ ‡å¿—å€¼ä¸ºfalse
+					account.setCount(0);				//å°†å¯†ç è¾“é”™æ¬¡æ•°ç½®0
 					userService.updateUser(account);
 				}
 				
-				// ÕË»§Ã»ÓĞËø¶¨
+				// è´¦æˆ·æ²¡æœ‰é”å®š
 				User user = userService.findByAccountAndPass(this.loginUser.getAccount(), this.loginUser.getPassword());									
 				
-				// ÅĞ¶ÏÃÜÂëÊÇ·ñÕıÈ·
+				// åˆ¤æ–­å¯†ç æ˜¯å¦æ­£ç¡®
 				if(user != null){			
 					
-					//ÉèÖÃsessionId
+					//è®¾ç½®sessionId
 					user.setSessionId(request.getSession().getId());
-					// ½«´íÎó´ÎÊıÇå0
+					// å°†é”™è¯¯æ¬¡æ•°æ¸…0
 					user.setCount(0);
 					userService.updateUser(user);
 					
-					// µÇÂ½³É¹¦
+					// ç™»é™†æˆåŠŸ
 					request.getSession().setAttribute("userinfo", user);				
 					
-					// ¼ÇÂ¼ÈÕÖ¾
+					// è®°å½•æ—¥å¿—
 					SystemOperate systemOperate = new SystemOperate();
 					systemOperate.setAccount(user.getAccount());
 					systemOperate.setName(user.getName());
 					systemOperate.setRole(user.getRole());
-					systemOperate.setEvent("µÇÂ¼ÁËÏµÍ³");
-					systemOperate.setIp(request.getRemoteAddr());	// ÉèÖÃip
-					systemOperate.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));  //ÉèÖÃÈÕÆÚ 
+					systemOperate.setEvent("ç™»å½•äº†ç³»ç»Ÿ");
+					systemOperate.setIp(request.getRemoteAddr());	// è®¾ç½®ip
+					systemOperate.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));  //è®¾ç½®æ—¥æœŸ 
 					
 					systemOperateService.insertSystemOperateLog(systemOperate);
 					
@@ -123,63 +123,63 @@ public class UserAction extends ActionSupport{
 					
 				}
 
-				// ÃÜÂëÊäÈë´íÎó
-				// ÅĞ¶Ï¾àÀëÉÏ´ÎÃÜÂëÊäÈë´íÎóÊ±¼äÊÇ·ñ´óÓÚ5·ÖÖÓ
+				// å¯†ç è¾“å…¥é”™è¯¯
+				// åˆ¤æ–­è·ç¦»ä¸Šæ¬¡å¯†ç è¾“å…¥é”™è¯¯æ—¶é—´æ˜¯å¦å¤§äº5åˆ†é’Ÿ
 				if(isGtTimes(account.getLastErrorTime())){					
-					account.setCount(0);	// ½«ÃÜÂëÊäÈë´íÎó´ÎÊıÖÃ0
+					account.setCount(0);	// å°†å¯†ç è¾“å…¥é”™è¯¯æ¬¡æ•°ç½®0
 				}
 				
-				// ÅĞ¶ÏÃÜÂëÊä´í´ÎÊıÊÇ·ñµ½´ï5´Î
+				// åˆ¤æ–­å¯†ç è¾“é”™æ¬¡æ•°æ˜¯å¦åˆ°è¾¾5æ¬¡
 				if(account.getCount() >= 4) {
 					
-					account.setFlag(true); 			// ½«Ëø¶¨±êÖ¾Î»ÖÃÎªtrue
-					account.setTime(new Date());	// ÉèÖÃËø¶¨Ê±¼ä
-					account.setLastErrorTime(new Date());  // ÉèÖÃÃÜÂëÊäÈë´íÎóÊ±¼ä
+					account.setFlag(true); 			// å°†é”å®šæ ‡å¿—ä½ç½®ä¸ºtrue
+					account.setTime(new Date());	// è®¾ç½®é”å®šæ—¶é—´
+					account.setLastErrorTime(new Date());  // è®¾ç½®å¯†ç è¾“å…¥é”™è¯¯æ—¶é—´
 					userService.updateUser(account);
 					
-					// ¼ÇÂ¼ÕË»§Ëø¶¨ÊÂ¼ş
+					// è®°å½•è´¦æˆ·é”å®šäº‹ä»¶
 					SystemOperate systemOperate = new SystemOperate();
 					systemOperate.setAccount("");
 					systemOperate.setName("");
 					systemOperate.setRole("");
-					systemOperate.setEvent("ÕË»§ " + account.getAccount() + " ±»Ëø¶¨");
-					systemOperate.setRemarks("ÕË»§±»Ëø¶¨");
-					systemOperate.setIp(request.getRemoteAddr());	// ÉèÖÃip
-					systemOperate.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));  //ÉèÖÃÈÕÆÚ 
+					systemOperate.setEvent("è´¦æˆ· " + account.getAccount() + " è¢«é”å®š");
+					systemOperate.setRemarks("è´¦æˆ·è¢«é”å®š");
+					systemOperate.setIp(request.getRemoteAddr());	// è®¾ç½®ip
+					systemOperate.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));  //è®¾ç½®æ—¥æœŸ 
 					systemOperateService.insertSystemOperateLog(systemOperate);
 					
-					loginResult = "ÃÜÂëÊä´í5´Î£¬ÕË»§±»Ëø¶¨";
+					loginResult = "å¯†ç è¾“é”™5æ¬¡ï¼Œè´¦æˆ·è¢«é”å®š";
 					return toLoginUI();
 				}
 				
-				// Êä´í´ÎÊıĞ¡ÓÚ5´Î
+				// è¾“é”™æ¬¡æ•°å°äº5æ¬¡
 				Integer errorCount = account.getCount() + 1;
-				account.setCount(errorCount);	// ÉèÖÃÊäÈë´íÎó´ÎÊı
-				account.setLastErrorTime(new Date());  // ÉèÖÃÃÜÂëÊäÈë´íÎóÊ±¼ä
+				account.setCount(errorCount);	// è®¾ç½®è¾“å…¥é”™è¯¯æ¬¡æ•°
+				account.setLastErrorTime(new Date());  // è®¾ç½®å¯†ç è¾“å…¥é”™è¯¯æ—¶é—´
 				userService.updateUser(account);
 				
-				loginResult = "ÃÜÂë²»ÕıÈ·£¬ÊäÈë´íÎó" + errorCount + "´Î£¡";
+				loginResult = "å¯†ç ä¸æ­£ç¡®ï¼Œè¾“å…¥é”™è¯¯" + errorCount + "æ¬¡ï¼";
 				return toLoginUI();
 				
 			}else{
 				
-				loginResult = "ÓÃ»§Ãû»òÃÜÂë²»ÄÜÎª¿Õ£¡";
+				loginResult = "ç”¨æˆ·åæˆ–å¯†ç ä¸èƒ½ä¸ºç©ºï¼";
 				
 				return toLoginUI();
 			}
 			
 		}catch(Exception e){
 			
-			System.out.println("µÇÂ¼³öÏÖÒì³£"+e);
+			System.out.println("ç™»å½•å‡ºç°å¼‚å¸¸"+e);
 			
 			return toLoginUI();
 		}
 	}
 	
 	/**
-	 * ÅĞ¶Ïµ±Ç°Ê±¼äÓë¸ø¶¨Ê±¼ä²îÊÇ·ñĞ¡ÓÚ1Ğ¡Ê±
+	 * åˆ¤æ–­å½“å‰æ—¶é—´ä¸ç»™å®šæ—¶é—´å·®æ˜¯å¦å°äº1å°æ—¶
 	 * @param time
-	 * @return Ğ¡ÓÚ1Ğ¡Ê±·µ»Øtrue
+	 * @return å°äº1å°æ—¶è¿”å›true
 	 * @throws ParseException
 	 */
 	private boolean isLimit(Date date) throws ParseException {
@@ -199,9 +199,9 @@ public class UserAction extends ActionSupport{
 	}
 	
 	/**
-     * ÅĞ¶Ïµ±Ç°Ê±¼äÓë¸ø¶¨Ê±¼ä²îÊÇ·ñ´óÓÚ5·ÖÖÓ 
+     * åˆ¤æ–­å½“å‰æ—¶é—´ä¸ç»™å®šæ—¶é—´å·®æ˜¯å¦å¤§äº5åˆ†é’Ÿ 
      * @param date
-     * @return ´óÓÚ5·ÖÖÓ·µ»Øtrue
+     * @return å¤§äº5åˆ†é’Ÿè¿”å›true
      * @throws Exception
      */
     public boolean isGtTimes(Date date) throws Exception{
@@ -220,7 +220,7 @@ public class UserAction extends ActionSupport{
     }
 	
     /**
-     * ÅĞ¶ÏÓÃ»§µÄµÇÂ¼×´¿ö
+     * åˆ¤æ–­ç”¨æˆ·çš„ç™»å½•çŠ¶å†µ
      */
     public String userState(){
     	

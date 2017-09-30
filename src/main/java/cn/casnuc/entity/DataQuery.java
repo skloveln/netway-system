@@ -35,9 +35,9 @@ public class DataQuery {
 		this.fileName = fileName;
 	}
 	public int getTransferDrection() {
-		if(transferDrection.equals("单向导入")){
+		if(transferDrection.equals("鍗曞悜瀵煎叆")){
 			return 2;
-		}else if(transferDrection.equals("单向导出")){
+		}else if(transferDrection.equals("鍗曞悜瀵煎嚭")){
 			return 1;
 		}else{
 			return 999;
@@ -47,9 +47,9 @@ public class DataQuery {
 		this.transferDrection = transferDrection;
 	}
 	public int getTransferResult() {
-		if(transferResult.equals("成功")){
+		if(transferResult.equals("鎴愬姛")){
 			return 0;
-		}else if(transferResult.equals("失败")){
+		}else if(transferResult.equals("澶辫触")){
 			return 1;
 		}else{
 			return 999;
@@ -90,7 +90,7 @@ public class DataQuery {
 		try {
 			result = dateFormat.parse(value);
 		} catch (ParseException e) {
-			System.out.println(value + "  时间转换异常");
+			System.out.println(value + "  鏃堕棿杞崲寮傚父");
 		}
 		
 		return result;

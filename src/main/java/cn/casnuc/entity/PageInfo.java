@@ -4,10 +4,10 @@ import java.util.List;
 
 public class PageInfo {
 	
-	private Integer allPage;	// ×ÜÒ³Êı
-	private Integer allSize;	// ×Ü¼ÇÂ¼Êı
-	private Integer perPageSize;	// Ã¿Ò³¼ÇÂ¼Êı
-	private Integer currentPage; // µ±Ç°Ò³
+	private Integer allPage;	// æ€»é¡µæ•°
+	private Integer allSize;	// æ€»è®°å½•æ•°
+	private Integer perPageSize;	// æ¯é¡µè®°å½•æ•°
+	private Integer currentPage; // å½“å‰é¡µ
 	private List<?> list;
 	
 	public Integer getAllPage() {

@@ -20,7 +20,7 @@ public class myFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		
-		// ËùÓÐ¶Ôhtml»òjspµÄÖ±½Ó·ÃÎÊÈ«²¿Ìø×ªµ½µÇÂ¼Ò³
+		// æ‰€æœ‰å¯¹htmlæˆ–jspçš„ç›´æŽ¥è®¿é—®å…¨éƒ¨è·³è½¬åˆ°ç™»å½•é¡µ
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;  
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 

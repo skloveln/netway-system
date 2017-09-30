@@ -12,7 +12,7 @@ public class ProtectConfigService {
 	}
 	
 	/**
-	 * 查看防护策略配置
+	 * 鏌ョ湅闃叉姢绛栫暐閰嶇疆
 	 * @return
 	 */
 	public ProtectReturn queryProtectConfig(){

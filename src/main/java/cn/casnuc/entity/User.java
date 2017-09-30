@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class User {
 
-	private int id; // ÓÃ»§±àºÅ
-	private String account; // ÓÃ»§ÕËºÅ
-	private String name; // ÓÃ»§ĞÕÃû
-	private String password; // ÓÃ»§ÃÜÂë
-	private String role; // ÓÃ»§½ÇÉ«
-	private Permission permission; // ÓÃ»§È¨ÏŞ
-	private Date time; // ÓÃ»§ÕË»§Ëø¶¨Ê±¼ä
-	private Integer count; // ÓÃ»§ÊäÈëÃÜÂë´íÎó´ÎÊı
-	private boolean flag; // ÓÃ»§ÕË»§Ëø¶¨±êÖ¾Î»
-	private Date lastErrorTime; //×îºóÒ»´ÎÊä´íÃÜÂëµÄÊ±¼ä
-	private String sessionId;  //ÓÃ»§µÇÂ¼µÄÎ¨Ò»±êÊ¶
+	private int id; // ç”¨æˆ·ç¼–å·
+	private String account; // ç”¨æˆ·è´¦å·
+	private String name; // ç”¨æˆ·å§“å
+	private String password; // ç”¨æˆ·å¯†ç 
+	private String role; // ç”¨æˆ·è§’è‰²
+	private Permission permission; // ç”¨æˆ·æƒé™
+	private Date time; // ç”¨æˆ·è´¦æˆ·é”å®šæ—¶é—´
+	private Integer count; // ç”¨æˆ·è¾“å…¥å¯†ç é”™è¯¯æ¬¡æ•°
+	private boolean flag; // ç”¨æˆ·è´¦æˆ·é”å®šæ ‡å¿—ä½
+	private Date lastErrorTime; //æœ€åä¸€æ¬¡è¾“é”™å¯†ç çš„æ—¶é—´
+	private String sessionId;  //ç”¨æˆ·ç™»å½•çš„å”¯ä¸€æ ‡è¯†
 	
 	public User() {
 	}
