@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	 http://www.springframework.org/schema/beans/spring-beans.xsd
+     	 http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/tx
+     	 http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="protectLogInfoAction" class="cn.casnuc.action.ProtectLogInfoAction" scope="prototype">
+		<property name="protectLogInfoService" ref="protectLogInfoService"></property>
+		<property name="systemOperateService" ref="operateService"></property>
+	</bean>
+	
+	<bean id="attackLogInfoAction" class="cn.casnuc.action.AttackLogInfoAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="attackLogInfoService" ref="attackLogInfoService"></property>
+		<property name="systemOperateService" ref="operateService"></property>
+	</bean>
+	
+	<bean id="addUserAction" class="cn.casnuc.action.AddUserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="systemOperateService" ref="operateService"></property>
+	</bean>
+	
+	<bean id="deleteUserAction" class="cn.casnuc.action.DeleteUserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="systemOperateService" ref="operateService"></property>
+	</bean>
+	
+	<bean id="updateUserAction" class="cn.casnuc.action.UpdateUserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="systemOperateService" ref="operateService"></property>
+	</bean>
+	
+	<bean id="queryUserAction" class="cn.casnuc.action.QueryUserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="systemOperateService" ref="operateService"></property>
+	</bean>
+	
+	<bean id="userAction" class="cn.casnuc.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="systemOperateService" ref="operateService"></property>
+	</bean>
+	
+	<bean id="operateAction" class="cn.casnuc.action.SystemOperateAction" scope="prototype">
+		<property name="systemOperateService" ref="operateService"></property>
+	</bean>
+	
+	<bean id="transferConfigAction" class="cn.casnuc.action.TransferConfigAction" scope="prototype">
+		<property name="transferConfigService" ref="transferConfigService"></property>
+		<property name="systemOperateService" ref="operateService"></property>
+	</bean>
+	
+	<bean id="protectConfigAction" class="cn.casnuc.action.ProtectConfigAction" scope="prototype">
+		<property name="protectConfigService" ref="protectConfigService"></property>
+		<property name="systemOperateService" ref="operateService"></property>
+	</bean>
+</beans>     
+
+
+
+
+
+
+
+
+
+
