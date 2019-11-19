@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	 http://www.springframework.org/schema/beans/spring-beans.xsd
+     	 http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/tx
+     	 http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	
+	<bean id="protectLogInfoDao" class="cn.casnuc.dao.ProtectLogInfoDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="attackLogInfoDao" class="cn.casnuc.dao.AttackLogInfoDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="userDao" class="cn.casnuc.dao.UserDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="operateDao" class="cn.casnuc.dao.SystemOperateDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="transferConfigDao" class="cn.casnuc.dao.TransferConfigDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="protectConfigDao" class="cn.casnuc.dao.ProtectConfigDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+</beans>     
+
+
+
+
+
+
+
+
+
+

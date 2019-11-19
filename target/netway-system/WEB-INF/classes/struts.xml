@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- 禁用动态方法访问 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- 配置成开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 配置拓展名为action -->
+	<constant name="struts.action.extention" value="action" />
+	<!-- 把主题配置成simple -->
+	<constant name="struts.ui.theme" value="simple" />
+
+	<package name="other" extends="json-default">
+					
+		<global-results>
+			<result name="success" type="json">
+				<param name="root">jsonResult</param>
+			</result>		
+		</global-results>
+		
+		<!-- 增加用户时查询用户是否存在 -->		
+		<action name="ajaxadduser" class="addUserAction" method="queryUserAccount">		
+			<result type="json">
+				<param name="root">result</param>
+			</result>				  
+		</action>
+		
+		<!-- 删除系统用户或管理员 -->
+		<action name="deleteuserjson" class="deleteUserAction" method="execute">		
+			<result type="json">
+				<param name="root">jsonResult</param>
+			</result>				  
+		</action>
+		
+		<!-- 查看防护日志 -->
+		<action name="protectlogjson" class="protectLogInfoAction" method="jsonInfo">		
+			<result name="success" type="json">
+				<param name="root">jsonstring</param>
+			</result>	
+		</action>
+		
+		<!-- 查看攻击日志 -->
+		<action name="attacklogjson" class="attackLogInfoAction" method="execute">		
+			<result name="success" type="json">
+				<param name="root">jsonResult</param>
+			</result>	
+		</action>
+		
+		<!-- 记录操作日志 -->
+		<action name="writelog" class="operateAction" method="writeLog"></action>
+		
+		<!-- 查看用户状态 -->
+		<action name="userstate" class="userAction" method="userState"></action>
+		
+		<!-- 查看用户信息 -->
+		<action name="queryuserjson" class="queryUserAction" method="queryUser">
+			<result name="success" type="json">
+				<param name="root">jsonResult</param>
+			</result>	  			
+		</action>
+		
+		<!-- 查看管理员信息 -->
+		<action name="queryadminjson" class="queryUserAction" method="queryAdmin">
+			<result name="success" type="json">
+				<param name="root">jsonResult</param>
+			</result>			
+		</action>
+		
+		<!-- 更新用户信息 -->
+		<action name="updateuserjson" class="updateUserAction" method="updateInfoJson">
+			<result name="success" type="json">
+				<param name="root">jsonResult</param>
+			</result>	
+		</action>
+		
+		<!-- 更新管理员信息 -->
+		<action name="updateadminjson" class="updateUserAction" method="updateAdmin">
+			<result name="success" type="json">
+				<param name="root">jsonResult</param>
+			</result>	
+		</action>
+		
+		<!-- 查看操作信息 -->
+		<action name="operatejson" class="operateAction" method="queryOperate">
+			<result name="success" type="json">
+				<param name="root">jsonResult</param>
+			</result>	
+		</action>
+		
+	</package>
+	
+	<package name="main" extends="struts-default" >
+	
+		<!-- 【拦截器配置】 -->
+		<interceptors>
+	
+			<!-- 配置用户自定义的拦截器 -->
+			<interceptor name="systemInterceptor" class="cn.casnuc.interceptor.SystemInterceptor"></interceptor>
+	
+			<!-- 自定义一个栈： 要引用默认栈、自定义的拦截器 -->
+			<interceptor-stack name="systemStack">
+				<!-- 引用默认栈 (一定要放到第一行) -->
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<!-- 引用自定义拦截器 -->
+				<interceptor-ref name="systemInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>	
+		
+		<!-- 【执行拦截器】 -->
+		<default-interceptor-ref name="systemStack"></default-interceptor-ref>
+		
+		<global-results>
+			<result name="relogin">/WEB-INF/relogin.jsp</result>
+			<result name="login">/login.jsp</result>		
+		</global-results>
+		
+		<!-- 用户登录 -->
+		<action name="login" class="userAction" method="login">
+			<result name="success" type="redirect">/mainIndex.html</result>
+		</action>
+		
+		<!-- 增加用户 -->
+		<action name="adduser" class="addUserAction" method="execute">
+			<result name="success">/WEB-INF/right.html</result>	  
+		</action>
+		
+		<!-- 修改密码 -->
+		<action name="updatepassword" class="updateUserAction" method="modifyPassword">
+			<result name="success">/WEB-INF/right.html</result>	  
+		</action>
+		
+		<!-- 修改个人信息 -->
+		<action name="updateuser" class="updateUserAction" method="updateInfo">
+			<result name="success">/WEB-INF/right.html</result>	  
+		</action>
+		
+		<!-- 查看传输服务配置信息 -->
+		<action name="transferconfig" class="transferConfigAction" method="queryTransferConfig">
+			<result name="success">/WEB-INF/transferConfig.jsp</result>	  
+		</action>
+			
+		<!-- 查看防护策略配置信息 -->
+		<action name="protectconfig" class="protectConfigAction" method="execute">
+			<result name="success">/WEB-INF/protectConfig.jsp</result>	  
+		</action>
+		
+		<!-- 所有jsp都交给struts处理 -->
+		<action name="top" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/top.jsp</result>	  
+		</action>
+		<action name="left" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/left.jsp</result>	  
+		</action>
+		<action name="protectLogInfo" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/protectLogInfo.jsp</result>	  
+		</action>
+		<action name="attackLogInfo" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/attackLogInfo.jsp</result>	  
+		</action>
+		<action name="right" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/right.html</result>	  
+		</action>
+		<action name="user_modifyPassword" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/user_modifyPassword.jsp</result>	  
+		</action>
+		<action name="user_modifyInfo" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/user_modifyInfo.jsp</result>	  
+		</action>
+		<action name="systemOperate_safe" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/systemOperate_safe.jsp</result>	  
+		</action>
+		<action name="all_admin" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/all_admin.jsp</result>	  
+		</action>
+		<action name="user_add_safe" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/user_add_safe.jsp</result>	  
+		</action>
+		<action name="systemOperate_audit" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/systemOperate_audit.jsp</result>	  
+		</action>
+		<action name="systemOperate_sysadmin" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/systemOperate_sysadmin.jsp</result>	  
+		</action>
+		<action name="user_add_audit" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/user_add_audit.jsp</result>	  
+		</action>
+		<action name="all_user" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/all_user.jsp</result>	  
+		</action>
+		<action name="user_add_sysadmin" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/user_add_sysadmin.jsp</result>	  
+		</action>
+		<action name="user_add" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/user_add.jsp</result>	  
+		</action>
+		<action name="relogin" class="userAction" method="publicMethod">
+			<result name="success">/WEB-INF/relogin.jsp</result>
+		</action>
+		<action name="exit" class="userAction" method="publicMethod">
+			<result name="success">/login.jsp</result>
+		</action>	
+		
+	</package>
+
+</struts>
