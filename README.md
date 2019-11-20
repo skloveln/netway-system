@@ -1,13 +1,16 @@
-# NetwaySystem
-Struts2 + Spring + Hibernate + SQLServer + Tomcat + Maven + Myeclipse
+### 网关日志信息管理系统
 
-## 网关的日志信息管理系统
+- 项目框架：
+> Struts2 + Spring + Hibernate + MySQL
 
-	可以查看防护日志和攻击日志
+- 功能：
+>1、多角色权限划分
 
-	可以查看网关的配置
+>2、网关日志查看
 
-	三员管理
+>3、网关配置查看
+
+>4、系统操作日志查看
 	
 	
 
